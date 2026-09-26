@@ -1,4 +1,3 @@
-import React from 'react';
 import products from '../data/products.json';
 import CardProductos from './CardProductos';
 import './ProductList.css';
@@ -6,7 +5,7 @@ import './ProductList.css';
 const ProductList = () => {
   return (
     <div className="product-list-container">
-      <h2 className="product-list-title">Nuestros Productos</h2>
+      <h2 className="product-list-title">Nuestros Videojuegos</h2>
       <div className="products-grid">
         {products.map((product) => (
           <CardProductos key={product.id} product={product} />
