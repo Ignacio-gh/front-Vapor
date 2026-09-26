@@ -5,7 +5,7 @@ import './ProductList.css';
 const ProductList = () => {
   return (
     <div className="product-list-container">
-      <h2 className="product-list-title">Nuestros Videojuegos</h2>
+      <h2 className="product-list-title">Catálogo de Videojuegos</h2>
       <div className="products-grid">
         {products.map((product) => (
           <CardProductos key={product.id} product={product} />

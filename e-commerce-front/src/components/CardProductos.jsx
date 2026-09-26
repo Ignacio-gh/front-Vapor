@@ -7,6 +7,7 @@ const CardProductos = ({ product }) => {
       <h3 className="producto-titulo">{product.titulo}</h3>
       <p className="producto-descripcion">{product.descripcion}</p>
       <p className="producto-precio">${product.precio}</p>
+      <button className="producto-boton">Agregar al carrito</button>
     </div>
   );
 };
