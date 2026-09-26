@@ -7,6 +7,14 @@
   flex-direction: column;
 }
 
+.producto-imagen {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
 .producto-titulo {
   font-size: 1.1rem;
   font-weight: 600;

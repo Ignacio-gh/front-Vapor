@@ -3,36 +3,42 @@
     "id": 1,
     "titulo": "The Legend of Zelda: Breath of the Wild",
     "descripcion": "Explora un vasto mundo abierto lleno de misterios y aventuras.",
-    "precio": 59.99
+    "precio": 59.99,
+    "imagen": "/images/zelda-botw.jpg"
   },
   {
     "id": 2,
     "titulo": "God of War Ragnarök",
     "descripcion": "Kratos y Atreus enfrentan el fin de los tiempos en la mitología nórdica.",
-    "precio": 49.99
+    "precio": 49.99,
+    "imagen": "/images/god-of-war.jpg"
   },
   {
     "id": 3,
     "titulo": "Elden Ring",
     "descripcion": "Un RPG de acción en un reino en ruinas gobernado por semidioses.",
-    "precio": 39.99
+    "precio": 39.99,
+    "imagen": "/images/elden-ring.jpg"
   },
   {
     "id": 4,
     "titulo": "Hollow Knight",
     "descripcion": "Aventura de acción en un reino subterráneo en ruinas.",
-    "precio": 14.99
+    "precio": 14.99,
+    "imagen": "/images/hollow-knight.jpg"
   },
   {
     "id": 5,
     "titulo": "Stardew Valley",
     "descripcion": "Hereda una vieja granja y construye la vida que siempre soñaste.",
-    "precio": 9.99
+    "precio": 9.99,
+    "imagen": "/images/stardew-valley.jpg"
   },
   {
     "id": 6,
     "titulo": "Hades",
     "descripcion": "Escapa del inframundo griego en este roguelike de acción.",
-    "precio": 24.99
+    "precio": 24.99,
+    "imagen": "/images/hades.jpg"
   }
 ]
