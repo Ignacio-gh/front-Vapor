@@ -35,3 +35,14 @@
   color: #ff9800;
   margin: 0;
 }
+
+.producto-boton {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
