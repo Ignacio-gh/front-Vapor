@@ -5,8 +5,9 @@
 }
 
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--vapor-black) 0%, #1f4d38 100%);
+  border: 1px solid var(--vapor-green);
+  color: var(--vapor-text);
   padding: 4rem 2rem;
   border-radius: 10px;
   text-align: center;
@@ -25,8 +26,8 @@
 
 .cta-button {
   display: inline-block;
-  background-color: #3498db;
-  color: white;
+  background-color: var(--vapor-green);
+  color: var(--vapor-black);
   padding: 0.75rem 2rem;
   border-radius: 5px;
   text-decoration: none;
@@ -35,7 +36,7 @@
 }
 
 .cta-button:hover {
-  background-color: #2980b9;
+  background-color: var(--vapor-green-dark);
 }
 
 .features {
@@ -45,10 +46,11 @@
 }
 
 .feature-card {
-  background: white;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -58,12 +60,12 @@
 }
 
 .feature-card h3 {
-  color: #2c3e50;
+  color: var(--vapor-text);
   margin-bottom: 1rem;
   font-size: 1.3rem;
 }
 
 .feature-card p {
-  color: #7f8c8d;
+  color: var(--vapor-muted);
   line-height: 1.6;
 }

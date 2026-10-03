@@ -1,10 +1,11 @@
 .navbar {
-  background-color: #2c3e50;
+  background-color: var(--vapor-black);
+  border-bottom: 2px solid var(--vapor-green);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(106, 216, 164, 0.15);
 }
 
 .navbar-container {
@@ -19,7 +20,7 @@
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: var(--vapor-text);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -27,7 +28,7 @@
 }
 
 .navbar-brand:hover {
-  color: #3498db;
+  color: var(--vapor-green);
 }
 
 .nav-menu {
@@ -37,19 +38,19 @@
 }
 
 .nav-link {
-  color: white;
+  color: var(--vapor-text);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #3498db;
+  color: var(--vapor-green);
 }
 
 .nav-link.active {
-  color: #3498db;
-  border-bottom: 2px solid #3498db;
+  color: var(--vapor-green);
+  border-bottom: 2px solid var(--vapor-green);
   padding-bottom: 0.5rem;
 }
 

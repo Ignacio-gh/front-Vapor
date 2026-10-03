@@ -6,27 +6,28 @@
 
 .about-container h1 {
   text-align: center;
-  color: #2c3e50;
+  color: var(--vapor-text);
   margin-bottom: 2rem;
   font-size: 2.5rem;
 }
 
 .about-content {
-  background: white;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
   line-height: 1.8;
 }
 
 .about-content p {
-  color: #555;
+  color: var(--vapor-muted);
   margin-bottom: 1.5rem;
   font-size: 1.05rem;
 }
 
 .about-content h2 {
-  color: #2c3e50;
+  color: var(--vapor-text);
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -38,10 +39,10 @@
 }
 
 .values-list li {
-  color: #555;
+  color: var(--vapor-muted);
   padding: 0.75rem 0;
   font-size: 1.05rem;
-  border-bottom: 1px solid #ecf0f1;
+  border-bottom: 1px solid var(--vapor-border);
 }
 
 .values-list li:last-child {
