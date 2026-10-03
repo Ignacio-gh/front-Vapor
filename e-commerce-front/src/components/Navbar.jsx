@@ -34,6 +34,21 @@ function Navbar() {
               Contacto
             </Link>
           </li>
+          <li>
+            <Link to="/biblioteca" className={isActive('/biblioteca') ? 'nav-link active' : 'nav-link'}>
+              Biblioteca
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/productos" className={isActive('/admin/productos') ? 'nav-link active' : 'nav-link'}>
+              Admin
+            </Link>
+          </li>
+          <li>
+            <Link to="/login" className={isActive('/login') ? 'nav-link active' : 'nav-link'}>
+              Login
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

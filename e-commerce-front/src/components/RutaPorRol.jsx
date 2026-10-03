@@ -1,16 +1,21 @@
-const RutaPorRol = ({ usuario, rolRequerido }) => {
-  if (!usuario) {
-    return <Navigate to="/login" replace />;
+import { Navigate, Outlet } from 'react-router-dom'
+
+// Uso: <Route element={<RutaPorRol roles={['ROLE_ADMIN', 'ROLE_VENDEDOR']} />}>
+const RutaPorRol = ({ roles }) => {
+  // Autenticación y rol hardcodeados por ahora: reemplazar por los datos reales del login.
+  const isAuthenticated = true
+  const rol = 'ROLE_ADMIN'
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
   }
 
-  if (usuario.rol !== rolRequerido) {
-    return <Navigate to="/no-autorizado" replace />;
+  // logueado pero sin el rol pedido -> no autorizado (cae en el 404)
+  if (!roles.includes(rol)) {
+    return <Navigate to="/no-autorizado" replace />
   }
 
-  return <Outlet />;
-};
+  return <Outlet />
+}
 
-// Uso en las rutas:
-<Route element={<RutaPorRol usuario={usuario} rolRequerido="admin" />}>
-  <Route path="/admin/productos" element={<GestionProductos />} />
-</Route>
+export default RutaPorRol
