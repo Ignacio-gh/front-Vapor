@@ -5,7 +5,7 @@ import '../styles/Products.css'
 function Products() {
   return (
     <div className="products-container">
-      <h1>Nuestros Productos</h1>
+      <h1>Productos</h1>
       <div className="products-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
