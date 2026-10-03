@@ -10,6 +10,9 @@ import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
 import Cart from './components/Cart'
 import Login from './components/Login'
+import RutaPorRol from './components/RutaPorRol'
+import Biblioteca from './components/Biblioteca'
+import AdminProductos from './components/AdminProductos'
 
 
 function App() {
@@ -28,7 +31,12 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/cart" element={<Cart />} />
+          <Route path="/biblioteca" element={<Biblioteca />} />
           {/* <Route path="/checkout" element={<Checkout   />} /> */}
+        </Route>
+
+        <Route element={<RutaPorRol roles={['ROLE_ADMIN', 'ROLE_VENDEDOR']} />}>
+          <Route path="/admin/productos" element={<AdminProductos />} />
         </Route>
       </Routes>
       </>
