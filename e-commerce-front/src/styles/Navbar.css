@@ -15,11 +15,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 900;
+  white-space: nowrap;
   color: var(--vapor-text);
   text-decoration: none;
   display: flex;
@@ -33,14 +35,24 @@
 
 .nav-menu {
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: 2rem;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
   color: var(--vapor-text);
   text-decoration: none;
+  display: block;
+  font-size: 0.75rem;
   font-weight: 500;
+  padding: 0.4rem 0;
+  border-bottom: 2px solid transparent;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
   transition: color 0.3s ease;
 }
 
@@ -50,8 +62,7 @@
 
 .nav-link.active {
   color: var(--vapor-green);
-  border-bottom: 2px solid var(--vapor-green);
-  padding-bottom: 0.5rem;
+  border-bottom-color: var(--vapor-green);
 }
 
 @media (max-width: 768px) {
@@ -61,6 +72,8 @@
   }
 
   .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
   }
 }
