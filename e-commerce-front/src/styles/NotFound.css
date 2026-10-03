@@ -13,26 +13,26 @@
 .error-code {
   font-size: 5rem;
   font-weight: bold;
-  color: #e74c3c;
+  color: var(--vapor-green);
   margin: 0;
 }
 
 .notfound-content h2 {
-  color: #2c3e50;
+  color: var(--vapor-text);
   font-size: 2rem;
   margin-bottom: 1rem;
 }
 
 .notfound-content p {
-  color: #7f8c8d;
+  color: var(--vapor-muted);
   font-size: 1.1rem;
   margin-bottom: 2rem;
 }
 
 .btn-home {
   display: inline-block;
-  background-color: #3498db;
-  color: white;
+  background-color: var(--vapor-green);
+  color: var(--vapor-black);
   padding: 0.75rem 2rem;
   border-radius: 5px;
   text-decoration: none;
@@ -41,5 +41,5 @@
 }
 
 .btn-home:hover {
-  background-color: #2980b9;
+  background-color: var(--vapor-green-dark);
 }

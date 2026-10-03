@@ -1,23 +1,33 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* Paleta Vapor (colores del logo) */
+  --vapor-green: #6ad8a4;
+  --vapor-green-dark: #4fc48d;
+  --vapor-black: #0b0d0c;
+  --vapor-surface: #151a18;
+  --vapor-surface-2: #1d2421;
+  --vapor-border: #26302c;
+  --vapor-text: #e8f5ee;
+  --vapor-muted: #9fb5aa;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --text: var(--vapor-muted);
+  --text-h: var(--vapor-text);
+  --bg: var(--vapor-black);
+  --border: var(--vapor-border);
+  --code-bg: var(--vapor-surface-2);
+  --accent: var(--vapor-green);
+  --accent-bg: rgba(106, 216, 164, 0.15);
+  --accent-border: rgba(106, 216, 164, 0.5);
+  --social-bg: rgba(29, 36, 33, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  --sans: 'Exo 2', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Orbitron', system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -30,28 +40,31 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+#social .button-icon {
+  filter: invert(1) brightness(2);
 }
 
 body {
   margin: 0;
+  background: var(--vapor-black);
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* Orbitron para títulos, navegación y botones; Exo 2 para el texto */
+h3,
+h4,
+button,
+.navbar,
+.cta-button,
+.btn-back,
+.btn-send,
+.btn-details {
+  font-family: var(--heading);
 }
 
 #root {
@@ -75,7 +88,8 @@ h2 {
 
 h1 {
   font-size: 56px;
-  letter-spacing: -1.68px;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
   margin: 32px 0;
   @media (max-width: 1024px) {
     font-size: 36px;
