@@ -1,19 +1,11 @@
 import { useParams, Link } from 'react-router-dom'
+import products from '../data/products.json'
 import '../styles/ProductDetail.css'
 
 function ProductDetail() {
   const { id } = useParams()
 
-  const products = {
-    1: { name: 'Laptop ', price: 999.99, description: 'Laptop de última generación con procesador Intel i9' },
-    2: { name: 'Mouse', price: 29.99, description: 'Mouse inalámbrico ergonómico con batería duradera' },
-    3: { name: 'Teclado', price: 89.99, description: 'Teclado mecánico RGB con switches personalizables' },
-    4: { name: 'Monitor 4K', price: 399.99, description: 'Monitor UltraHD de 32 pulgadas' },
-    5: { name: 'Auriculares', price: 149.99, description: 'Auriculares inalámbricos con cancelación de ruido' },
-    6: { name: 'Webcam HD', price: 59.99, description: 'Cámara web 1080p con micrófono integrado' },
-  }
-
-  const product = products[id]
+  const product = products.find((p) => p.id === Number(id))
 
   if (!product) {
     return (
@@ -33,15 +25,13 @@ function ProductDetail() {
       </Link>
       <div className="product-detail">
         <div className="product-image">
-          <img
-            src={`https://placehold.co/200x200?text=${encodeURIComponent(product.name)}`}
-            alt={product.name}
-          />
+          <img src={product.imagen} alt={product.titulo} />
         </div>
         <div className="product-description">
-          <h1>{product.name}</h1>
-          <p className="description">{product.description}</p>
-          <p className="price">${product.price}</p>
+          <h1>{product.titulo}</h1>
+          <Link to={`/categoria/${product.genero}`}>{product.genero}</Link>
+          <p className="description">{product.descripcion}</p>
+          <p className="price">${product.precio}</p>
           <Link to="/cart" className="btn-back">
             <button className="btn-add-cart">Agregar al Carrito</button>
           </Link>

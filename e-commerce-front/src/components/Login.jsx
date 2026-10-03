@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function Login() {
   const navigate = useNavigate()
@@ -18,6 +18,9 @@ function Login() {
     <form onSubmit={handleLogin}>
       <h1>Iniciar sesión</h1>
       <button type="submit">Ingresar</button>
+      <p>
+        ¿No tenés cuenta? <Link to="/registro">Registrate</Link>
+      </p>
     </form>
   )
 }
