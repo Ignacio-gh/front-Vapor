@@ -4,6 +4,7 @@
     "titulo": "The Legend of Zelda: Breath of the Wild",
     "descripcion": "Explora un vasto mundo abierto lleno de misterios y aventuras.",
     "precio": 59.99,
+    "genero": "Aventura",
     "imagen": "/images/zelda-botw.jpg"
   },
   {
@@ -11,6 +12,7 @@
     "titulo": "God of War Ragnarök",
     "descripcion": "Kratos y Atreus enfrentan el fin de los tiempos en la mitología nórdica.",
     "precio": 49.99,
+    "genero": "Acción",
     "imagen": "/images/god-of-war.jpg"
   },
   {
@@ -18,6 +20,7 @@
     "titulo": "Elden Ring",
     "descripcion": "Un RPG de acción en un reino en ruinas gobernado por semidioses.",
     "precio": 39.99,
+    "genero": "RPG",
     "imagen": "/images/elden-ring.jpg"
   },
   {
@@ -25,6 +28,7 @@
     "titulo": "Hollow Knight",
     "descripcion": "Aventura de acción en un reino subterráneo en ruinas.",
     "precio": 14.99,
+    "genero": "Indie",
     "imagen": "/images/hollow-knight.jpg"
   },
   {
@@ -32,6 +36,7 @@
     "titulo": "Stardew Valley",
     "descripcion": "Hereda una vieja granja y construye la vida que siempre soñaste.",
     "precio": 9.99,
+    "genero": "Indie",
     "imagen": "/images/stardew-valley.jpg"
   },
   {
@@ -39,6 +44,7 @@
     "titulo": "Hades",
     "descripcion": "Escapa del inframundo griego en este roguelike de acción.",
     "precio": 24.99,
+    "genero": "Acción",
     "imagen": "/images/hades.jpg"
   }
 ]

@@ -13,6 +13,8 @@ import Login from './components/Login'
 import RutaPorRol from './components/RutaPorRol'
 import Biblioteca from './components/Biblioteca'
 import AdminProductos from './components/AdminProductos'
+import Registro from './components/Registro'
+import Categoria from './components/Categoria'
 
 
 function App() {
@@ -23,11 +25,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/categoria/:genero" element={<Categoria />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
 
         <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/cart" element={<Cart />} />
