@@ -21,8 +21,8 @@
   --shadow:
     rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: 'Exo 2', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Orbitron', system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -47,6 +47,24 @@
 body {
   margin: 0;
   background: var(--vapor-black);
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* Orbitron para títulos, navegación y botones; Exo 2 para el texto */
+h3,
+h4,
+button,
+.navbar,
+.cta-button,
+.btn-back,
+.btn-send,
+.btn-details {
+  font-family: var(--heading);
 }
 
 #root {
