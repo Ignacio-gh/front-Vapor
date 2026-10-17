@@ -1,133 +1,101 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart, clearCart } from '../store/slices/cartSlice';
 import defaultImage from '../assets/imgXdefault.jpg';
-const Cart = () => {
-  const [cartItems, setCartItems] = React.useState([
-    {
-      id: 1,
-      nombre: 'Remera básica',
-      precio: 12000,
-      quantity: 2
-    },
-    {
-      id: 2,
-      nombre: 'Zapatillas urbanas',
-      precio: 45000,
-      quantity: 1
-    }
-  ]);
 
-  const removeFromCart = (id) => {
-    setCartItems(items => items.filter(item => item.id !== id));
+const CartRedux = () => {
+  // useSelector es un hook de React Redux que permite acceder al estado global del store store.js
+  // store.cart.items accede a la propiedad items del slice cart del store global.
+  // cartItems contendrá el array de productos que están actualmente en el carrito.
+  
+  // con esta línea el componente se suscribe a cambios en store.cart.items, 
+  // cada vez que se modifica items de cartSlice, useSelector detecta el cambio y el componente CartRedux se re renderizar
+  const cartItems = useSelector((store) => store.cart.items);
+
+  // con useContext Si CUALQUIER dato del contexto cambia, el componente SE RE-RENDERIZA
+  // const { cartItems, addToCart } = useContext(CartContext);
+  // con redux solo re-renderiza si store.cart.items cambió, 
+  // si cambio store.cart.total este compomnete no se renderiza por que no está suscripto a store.cart.total usando useSelector((store) => store.cart.total);
+
+
+  // useDispatch Hook para despachar acciones a Redux (agregar, eliminar, vaciar carrito, etc.)
+  // dispatch con causa re renders
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (productId) => {
+    // Usar dispatch de Redux para eliminar un producto del carrito 
+    dispatch(removeFromCart(productId));
   };
 
-  return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1>Carrito de Compras</h1>
-      {/* Renderizado condicional con operador lógico AND (&&) */}
-      {/* Si la condición (cartItems.length > 0) es verdadera, se renderiza el elemento <p>. */}
-      {/* Si es falsa, no se renderiza nada. */}
-      {/* true && true -> true */}
-      {/* false && true -> false */}
-      {cartItems.length > 0 && (
-        <p>Tienes {cartItems.length} productos en el carrito</p>
-      )}
+  const handleClearCart = () => {
+    // Usar dispatch de Redux para vaciar el carrito 
+    dispatch(clearCart());
+  };
 
-      {/* Renderizado condicional con operador ternario */}
-      {/* Si el carrito está vacío (cartItems.length === 0), muestra un mensaje. */}
-      {/* De lo contrario (? significa 'entonces'), muestra la lista de productos (: significa 'si no'). */}
-      {/* func ? true : false */}
+  const calculateTotal = () => {
+    return cartItems.reduce((sum, item) => sum + item.precio, 0);
+  };
+
+  // cuando se ejecuta handleRemoveFromCart o handleClearCart, el estado del carrito se actualiza en el store global de Redux.
+  // Esto hace que el componente CartRedux se vuelva a renderizar automáticamente con el nuevo estado del carrito, mostrando los cambios en la interfaz de usuario.
+  const total = calculateTotal();
+
+  return (
+    <div style={styles.container}>
+      <h1>Carrito de Compras (Redux)</h1>
+      {cartItems.length > 0 && (<p>Tienes {cartItems.length} productos en el carrito</p>)}
+
       {cartItems.length === 0 ? (
         <p>Tu carrito está vacío</p>
       ) : (
         <>
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={styles.itemsContainer}>
             {cartItems.map(item => (
               <div 
                 key={item.id} 
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '100px 1fr auto',
-                  gap: '1rem',
-                  alignItems: 'center',
-                  padding: '1rem',
-                  borderBottom: '1px solid #eee'
-                }}
+                style={styles.itemCard}
               >
                 <img 
                   src={item.imagen || defaultImage}
                   alt={item.nombre}
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                    objectFit: 'cover',
-                    borderRadius: '4px'
-                  }}
+                  style={styles.itemImage}
                 />
                 <div>
-                  <h3 style={{ margin: '0 0 0.5rem 0' }}>{item.nombre}</h3>
-                  <p style={{ margin: '0', color: '#666' }}>
-                    Cantidad: {item.quantity}
-                  </p>
-                  <p style={{ margin: '0.5rem 0', color: '#2D3277', fontWeight: 'bold' }}>
-                    ${(item.precio * item.quantity).toLocaleString('es-AR')}
+                  <h3 style={styles.itemTitle}>{item.nombre}</h3>
+                  <p style={styles.itemPrice}>
+                    ${item.precio.toLocaleString('es-AR')}
                   </p>
                 </div>
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  style={{
-                    padding: '0.5rem',
-                    background: 'none',
-                    border: '1px solid #ff4444',
-                    color: '#ff4444',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}
-                >
+
+                <button onClick={() => handleRemoveFromCart(item.id)} style={styles.removeButton} >
                   Eliminar
                 </button>
+
               </div>
             ))}
           </div>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            padding: '1rem',
-            backgroundColor: '#f9f9f9',
-            borderRadius: '4px',
-            marginBottom: '1rem'
-          }}>
+          <div style={styles.totalContainer}>
+            <h3>Total: ${total.toLocaleString('es-AR')}</h3>
+            
+            <button onClick={handleClearCart} style={styles.clearButton} >
+              Vaciar carrito
+            </button>
+
           </div>
         </>
       )}
-      <div style={{ display: 'flex', gap: '1rem' }}>
+      <div style={styles.linksContainer}>
         <Link 
           to="/products"
-          style={{
-            backgroundColor: '#2D3277',
-            color: 'white',
-            padding: '0.5rem 1rem',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            textDecoration: 'none'
-          }}
+          style={styles.shoppingLink}
         >
           Seguir comprando
         </Link>
         {cartItems.length > 0 && (
           <Link 
             to="/checkout"
-            style={{
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              textDecoration: 'none'
-            }}
+            style={styles.checkoutLink}
           >
             Pagar
           </Link>
@@ -137,4 +105,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartRedux;
