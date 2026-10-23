@@ -29,6 +29,11 @@
   gap: 0.5rem;
 }
 
+.navbar-logo {
+  width: 32px;
+  height: 32px;
+}
+
 .navbar-brand:hover {
   color: var(--vapor-green);
 }

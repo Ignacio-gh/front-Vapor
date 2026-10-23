@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
 import '../styles/Home.css'
+import vaporLogo from '../assets/vapor-logo.svg'
 
 function Home() {
   return (
     <div className="home-container">
       <section className="hero">
-        <h1>¡Bienvenido a Nuestro E-Commerce!</h1>
-        <p>Descubre los mejores productos con React Router</p>
+        <img src={vaporLogo} alt="Vapor" className="hero-logo" />
+        <h1>Tienda de videojuegos digitales</h1>
+        <p>Descubre los mejores juegos al mejor precio</p>
         {/* mala práctica trae todos los componentes, con sus js, css, y carga toda la página de vuelta */}
-        <a href="https://example.com" className="cta-button">
-          ejemplo
-        </a>
         {/* solo carga el componente central */}
         <Link to="/products" className="cta-button">
           Ver Productos
