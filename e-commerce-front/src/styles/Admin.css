@@ -148,3 +148,20 @@
   justify-content: flex-end;
   gap: 0.5rem;
 }
+
+.admin-form .form-hint {
+  color: var(--vapor-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Mensaje propio debajo de cada campo (además de la validación nativa) */
+.field-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+}
+
+.admin-form [aria-invalid='true'] {
+  border-color: #ff6b6b;
+}
