@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import '../styles/Contact.css'
 
 function Login() {
   const navigate = useNavigate()
@@ -15,13 +16,15 @@ function Login() {
   }
 
   return (
-    <form onSubmit={handleLogin}>
+    <div className="contact-container">
       <h1>Iniciar sesión</h1>
-      <button type="submit">Ingresar</button>
+      <form className="contact-form" onSubmit={handleLogin}>
+        <button type="submit" className="btn-send">Ingresar</button>
+      </form>
       <p>
         ¿No tenés cuenta? <Link to="/registro">Registrate</Link>
       </p>
-    </form>
+    </div>
   )
 }
 

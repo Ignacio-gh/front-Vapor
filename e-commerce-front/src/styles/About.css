@@ -33,18 +33,41 @@
   font-size: 1.5rem;
 }
 
-.values-list {
-  list-style: none;
-  padding: 0;
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
 }
 
-.values-list li {
-  color: var(--vapor-muted);
-  padding: 0.75rem 0;
+.value-card {
+  background: var(--vapor-surface-2);
+  border: 1px solid var(--vapor-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--vapor-green-dark);
+}
+
+.value-icon {
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.value-card h3 {
+  color: var(--vapor-text);
   font-size: 1.05rem;
-  border-bottom: 1px solid var(--vapor-border);
+  margin: 0 0 0.4rem;
 }
 
-.values-list li:last-child {
-  border-bottom: none;
+.value-card p {
+  color: var(--vapor-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
 }

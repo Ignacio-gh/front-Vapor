@@ -3,30 +3,45 @@ import '../styles/About.css'
 function About() {
   return (
     <div className="about-container">
-      <h1>Acerca de Nosotros</h1>
+      <h1>Acerca de Vapor</h1>
       <section className="about-content">
         <p>
-          Somos una empresa dedicada a proporcionar los mejores productos tecnológicos
-          del mercado a precios competitivos.
+          Vapor es una tienda digital de videojuegos pensada para jugadores: catálogo
+          curado, precios competitivos y entrega inmediata, sin colas ni intermediarios.
         </p>
         <h2>Nuestra Misión</h2>
         <p>
-          Hacer que la tecnología de calidad sea accesible para todos, ofreciendo
-          productos confiables y un excelente servicio al cliente.
+          Acercar los mejores juegos, desde los grandes lanzamientos AAA hasta los
+          indies más prometedores, a cualquier jugador de Latinoamérica.
         </p>
         <h2>Nuestra Visión</h2>
         <p>
-          Ser líderes en el comercio electrónico de tecnología en Latinoamérica,
-          reconocidos por nuestra calidad y servicio.
+          Ser la plataforma de referencia para comprar videojuegos digitales en la
+          región, reconocida por su catálogo, su comunidad y la confianza de sus jugadores.
         </p>
-        <h2>Valores</h2>
-        <ul className="values-list">
-          <li>✓ Calidad en todos nuestros productos</li>
-          <li>✓ Honestidad y transparencia</li>
-          <li>✓ Atención al cliente excepcional</li>
-          <li>✓ Innovación continua</li>
-          <li>✓ Responsabilidad social</li>
-        </ul>
+        <h2>Nuestros Valores</h2>
+        <div className="values-grid">
+          <div className="value-card">
+            <span className="value-icon">🎮</span>
+            <h3>Catálogo completo</h3>
+            <p>De AAA a indies, siempre hay algo nuevo para jugar.</p>
+          </div>
+          <div className="value-card">
+            <span className="value-icon">🔒</span>
+            <h3>Compras seguras</h3>
+            <p>Transacciones protegidas de punta a punta.</p>
+          </div>
+          <div className="value-card">
+            <span className="value-icon">⚡</span>
+            <h3>Entrega inmediata</h3>
+            <p>Tu clave y tu biblioteca, disponibles al instante.</p>
+          </div>
+          <div className="value-card">
+            <span className="value-icon">🕹️</span>
+            <h3>Comunidad gamer</h3>
+            <p>Hecho por y para jugadores apasionados.</p>
+          </div>
+        </div>
       </section>
     </div>
   )

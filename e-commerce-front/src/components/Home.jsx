@@ -39,10 +39,6 @@ function Home() {
           <p>Encuentra todo lo que necesitas en un solo lugar</p>
         </div>
         <div className="feature-card">
-          <h3>🚚 Envío Rápido</h3>
-          <p>Entrega segura y rápida a tu hogar</p>
-        </div>
-        <div className="feature-card">
           <h3>💰 Mejores Precios</h3>
           <p>Obtén los mejores descuentos del mercado</p>
         </div>

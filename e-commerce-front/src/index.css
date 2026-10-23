@@ -22,7 +22,7 @@
     rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
   --sans: 'Exo 2', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: 'Orbitron', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Rajdhani', system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -55,6 +55,17 @@ select {
   font-family: inherit;
 }
 
+/* Color base para links sin clase propia (texto inline tipo "¿No tenés
+   cuenta? Registrate"), para que no queden con el azul/violeta default
+   del navegador en un sitio con fondo oscuro. */
+a {
+  color: var(--vapor-green);
+}
+
+a:hover {
+  color: var(--vapor-green-dark);
+}
+
 /* Orbitron para títulos, navegación y botones; Exo 2 para el texto */
 h3,
 h4,
@@ -72,7 +83,6 @@ button,
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
