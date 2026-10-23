@@ -20,8 +20,61 @@
 
 .admin-toolbar {
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-filter label {
+  color: var(--vapor-text);
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Mismos inputs que el formulario de producto para que el panel se vea uniforme */
+.admin-filter input,
+.admin-filter select {
+  min-width: 220px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.admin-filter input:focus,
+.admin-filter select:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
+
+.admin-count {
+  color: var(--vapor-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-table .admin-empty {
+  text-align: center;
+  color: var(--vapor-muted);
+  padding: 2rem 1rem;
 }
 
 .admin-error {
