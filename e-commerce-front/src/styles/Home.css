@@ -32,9 +32,8 @@
 }
 
 .hero-destacados {
-  /* Rompe el marco boxeado de #root (ancho fijo + borde-inline) para
-     llegar hasta el borde físico de la pantalla, sin importar dónde
-     esté centrado el contenido de la página. */
+  /* Rompe el ancho fijo de #root para llegar hasta el borde físico
+     de la pantalla. */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
@@ -46,9 +45,12 @@
   width: 100%;
   border-radius: 0;
   border: none;
-  border-top: 1px solid var(--vapor-green);
-  border-bottom: 1px solid var(--vapor-green);
   background: var(--vapor-black);
+  /* Funde los bordes superior/inferior de la banda con el fondo de la
+     página en vez de cortarlos con una línea recta. */
+  box-shadow:
+    inset 0 48px 48px -48px var(--vapor-black),
+    inset 0 -48px 48px -48px var(--vapor-black);
 }
 
 @media (max-width: 768px) {

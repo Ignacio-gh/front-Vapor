@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../store/slices/cartSlice'
 import { API_URL, PLACEHOLDER_IMG } from '../config/api'
 import '../styles/ProductDetail.css'
 
@@ -8,6 +10,11 @@ function ProductDetail() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const dispatch = useDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product))
+  }
 
   useEffect(() => {
     let ignore = false // descarta respuestas viejas si el id cambia antes de que lleguen
@@ -72,9 +79,9 @@ function ProductDetail() {
           <Link to={`/categoria/${product.genero}`}>{product.genero}</Link>
           <p className="description">{product.descripcion}</p>
           <p className="price">${product.precio}</p>
-          <Link to="/cart" className="btn-back">
-            <button className="btn-add-cart">Agregar al Carrito</button>
-          </Link>
+          <button className="btn-add-cart" onClick={handleAddToCart}>
+            Agregar al Carrito
+          </button>
         </div>
       </div>
     </div>

@@ -1,0 +1,137 @@
+.product-carousel {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.product-carousel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.product-carousel__header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--vapor-text);
+}
+
+.product-carousel__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-carousel__nav button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--vapor-border);
+  background: var(--vapor-surface);
+  color: var(--vapor-text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.product-carousel__nav button:hover {
+  border-color: var(--vapor-green);
+  color: var(--vapor-green);
+}
+
+.product-carousel__track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+
+.product-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.product-carousel__item {
+  flex: 0 0 auto;
+  width: 220px;
+  scroll-snap-align: start;
+}
+
+.carousel-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.carousel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 16px rgba(106, 216, 164, 0.35);
+  border-color: var(--vapor-green-dark);
+}
+
+.carousel-card__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: var(--vapor-surface-2);
+}
+
+.carousel-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-card__badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--vapor-green);
+  color: var(--vapor-black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.carousel-card__info {
+  padding: 0.85rem 1rem;
+}
+
+.carousel-card__info h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  color: var(--vapor-text);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.carousel-card__price {
+  margin: 0;
+  color: var(--vapor-green);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+  .product-carousel__item {
+    width: 160px;
+  }
+}

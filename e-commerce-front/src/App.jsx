@@ -7,7 +7,8 @@ import About from './components/About'
 import NotFound from './components/NotFound'
 import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
-import Cart from './components/Cart'
+import Carrito from './components/Carrito'
+import Checkout from './components/Checkout'
 import Login from './components/Login'
 import RutaPorRol from './components/RutaPorRol'
 import Biblioteca from './components/Biblioteca'
@@ -21,6 +22,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <Carrito />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
@@ -33,9 +35,8 @@ function App() {
         <Route path="/registro" element={<Registro />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/cart" element={<Cart />} />
           <Route path="/biblioteca" element={<Biblioteca />} />
-          {/* <Route path="/checkout" element={<Checkout   />} /> */}
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
 
         <Route element={<RutaPorRol roles={['ROLE_ADMIN', 'ROLE_VENDEDOR']} />}>

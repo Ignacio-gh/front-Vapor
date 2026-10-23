@@ -1,11 +1,10 @@
 .navbar {
   background-color: var(--vapor-black);
-  border-bottom: 2px solid var(--vapor-green);
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 12px rgba(106, 216, 164, 0.15);
+  box-shadow: 0 4px 20px rgba(106, 216, 164, 0.2);
 }
 
 .navbar-container {
@@ -68,6 +67,53 @@
 .nav-link.active {
   color: var(--vapor-green);
   border-bottom-color: var(--vapor-green);
+}
+
+.cart-button {
+  position: relative;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.cart-button:focus-visible {
+  outline: 2px solid var(--vapor-green);
+  outline-offset: 2px;
+}
+
+/* Contador de productos sobre el ícono */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--vapor-green);
+  color: var(--vapor-black);
+  font-size: 0.7rem;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+}
+
+.nav-logout {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-user {
+  color: var(--vapor-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {

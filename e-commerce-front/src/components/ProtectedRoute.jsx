@@ -1,18 +1,14 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { isAuthenticated } from '../utils/auth'
 
 function ProtectedRoute() {
-  // Autenticación hardcodeada por ahora: reemplazar por el token real del login.
-  const isAuthenticated = true;
+  const location = useLocation()
 
-  // Si no está logueado, lo redirige al Login
-  if (!isAuthenticated) {
-    return <Navigate to="/login"  />
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" state={{ from: location }} replace />
   }
 
-  // Si está autenticado, renderiza las rutas hijas (Outlet)
   return <Outlet />
 }
 
 export default ProtectedRoute
-
-

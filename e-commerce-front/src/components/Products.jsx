@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { API_URL } from '../config/api'
+import ProductCarousel from './ProductCarousel'
 import '../styles/Products.css'
-
-const PLACEHOLDER = 'https://placehold.co/300x200?text=Sin+imagen'
 
 function Products() {
   const [products, setProducts] = useState([])
@@ -28,32 +26,20 @@ function Products() {
   if (loading) return <p>Cargando productos...</p>
   if (error) return <p>{error}</p>
 
+  // Un carrusel por género, en el orden en que aparece cada uno por primera vez.
+  const porGenero = products.reduce((acc, product) => {
+    const genero = product.genero ?? 'Otros'
+    if (!acc[genero]) acc[genero] = []
+    acc[genero].push(product)
+    return acc
+  }, {})
+
   return (
     <div className="products-container">
       <h1>Productos</h1>
-      <div className="products-grid">
-        {products.map((product) => (
-          <div key={product.id} className="product-card">
-            <div className="product-image">
-              <img
-                src={product.imagenes?.[0] ?? PLACEHOLDER}
-                alt={product.nombre}
-                onError={(e) => {
-                  e.currentTarget.onerror = null // evita un bucle si el placeholder también falla
-                  e.currentTarget.src = PLACEHOLDER
-                }}
-              />
-            </div>
-            <div className="product-info">
-              <h3>{product.nombre}</h3>
-              <p className="price">${product.precio}</p>
-              <Link to={`/products/${product.id}`} className="btn-details">
-                Ver Detalles
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
+      {Object.entries(porGenero).map(([genero, items]) => (
+        <ProductCarousel key={genero} title={genero} items={items} />
+      ))}
     </div>
   )
 }
