@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import '../styles/Navbar.css'
+import vaporLogo from '../assets/vapor-logo.svg'
 
 function Navbar() {
   const location = useLocation()
@@ -10,7 +11,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">
-          🛒 Vapor
+          <img src={vaporLogo} alt="" className="navbar-logo" />
         </Link>
         
         <ul className="nav-menu">
@@ -27,11 +28,6 @@ function Navbar() {
           <li>
             <Link to="/about" className={isActive('/about') ? 'nav-link active' : 'nav-link'}>
               Acerca de
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className={isActive('/contact') ? 'nav-link active' : 'nav-link'}>
-              Contacto
             </Link>
           </li>
           <li>
