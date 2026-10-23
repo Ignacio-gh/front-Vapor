@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { apiFetch } from '../config/api'
 import '../styles/Admin.css'
 
@@ -17,11 +17,59 @@ const FORM_VACIO = {
   imagen: '',
 }
 
+// Pasa la respuesta del backend al shape del formulario: los inputs
+// controlados necesitan strings (nunca null) para no volverse no controlados
+function productoAForm(product) {
+  return {
+    nombre: product.nombre ?? '',
+    descripcion: product.descripcion ?? '',
+    precio: product.precio != null ? String(product.precio) : '',
+    stock: product.stock != null ? String(product.stock) : '',
+    genero: product.genero ?? '',
+    tipo: product.tipo ?? 'BASE',
+    imagen: product.imagenes?.[0] ?? '',
+  }
+}
+
+// Se usa para alta (/admin/productos/nuevo) y edición (/admin/productos/:id/editar):
+// si la URL trae id, precarga el producto y guarda con PUT en vez de POST
 function ProductoForm() {
+  const { id } = useParams()
+  const esEdicion = Boolean(id)
   const navigate = useNavigate()
   const [form, setForm] = useState(FORM_VACIO)
   const [error, setError] = useState(null)
   const [saving, setSaving] = useState(false)
+  const [loading, setLoading] = useState(esEdicion)
+  const [notFound, setNotFound] = useState(false)
+
+  useEffect(() => {
+    if (!esEdicion) return
+
+    let ignore = false // descarta respuestas viejas si el id cambia antes de que lleguen
+
+    const fetchProduct = async () => {
+      try {
+        const response = await apiFetch(`/api/productos/${id}`)
+        if (response.status === 404) {
+          if (!ignore) setNotFound(true)
+          return
+        }
+        if (!response.ok) throw new Error('Error al cargar el producto')
+        const data = await response.json()
+        if (!ignore) setForm(productoAForm(data))
+      } catch (err) {
+        if (!ignore) setError(err.message)
+      } finally {
+        if (!ignore) setLoading(false)
+      }
+    }
+
+    fetchProduct()
+    return () => {
+      ignore = true
+    }
+  }, [id, esEdicion])
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -46,12 +94,13 @@ function ProductoForm() {
     }
 
     try {
-      const response = await apiFetch('/api/productos', {
-        method: 'POST',
+      const response = await apiFetch(esEdicion ? `/api/productos/${id}` : '/api/productos', {
+        method: esEdicion ? 'PUT' : 'POST',
         body: JSON.stringify(body),
       })
 
-      if (response.status === 201) {
+      // POST responde 201 y PUT 200
+      if (response.ok) {
         navigate('/admin/productos')
         return
       }
@@ -67,9 +116,24 @@ function ProductoForm() {
     }
   }
 
+  if (loading) return <p>Cargando producto...</p>
+
+  if (notFound) {
+    return (
+      <div className="admin-container">
+        <h1>Producto no encontrado</h1>
+        <div className="admin-form-actions">
+          <button className="btn-admin" onClick={() => navigate('/admin/productos')}>
+            Volver a Administrar Productos
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="admin-container">
-      <h1>Nuevo producto</h1>
+      <h1>{esEdicion ? 'Editar producto' : 'Nuevo producto'}</h1>
 
       <form className="admin-form" onSubmit={handleSubmit}>
         {error && <p className="admin-error">{error}</p>}

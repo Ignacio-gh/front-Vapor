@@ -59,7 +59,12 @@ function AdminProductos() {
                 <td>{product.stock}</td>
                 <td>{product.genero}</td>
                 <td className="admin-actions">
-                  <button className="btn-admin">Editar</button>
+                  <button
+                    className="btn-admin"
+                    onClick={() => navigate(`/admin/productos/${product.id}/editar`)}
+                  >
+                    Editar
+                  </button>
                   <button className="btn-admin btn-admin-danger">Eliminar</button>
                 </td>
               </tr>
