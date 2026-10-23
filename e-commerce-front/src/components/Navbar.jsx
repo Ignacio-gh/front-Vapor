@@ -1,15 +1,23 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { openCart } from '../store/slices/cartSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
+import { isAuthenticated, getEmail, removeToken } from '../utils/auth'
 
 function Navbar() {
   const location = useLocation()
+  const navigate = useNavigate()
   const cartCount = useSelector((store) => store.cart.items.length)
   const dispatch = useDispatch()
 
   const isActive = (path) => location.pathname === path
+  const logueado = isAuthenticated()
+
+  const handleLogout = () => {
+    removeToken()
+    navigate('/')
+  }
 
   return (
     <nav className="navbar">
@@ -17,7 +25,7 @@ function Navbar() {
         <Link to="/" className="navbar-brand">
           <img src={vaporLogo} alt="" className="navbar-logo" />
         </Link>
-        
+
         <ul className="nav-menu">
           <li>
             <Link to="/" className={isActive('/') ? 'nav-link active' : 'nav-link'}>
@@ -44,11 +52,22 @@ function Navbar() {
               Admin
             </Link>
           </li>
-          <li>
-            <Link to="/login" className={isActive('/login') ? 'nav-link active' : 'nav-link'}>
-              Login
-            </Link>
-          </li>
+          {logueado ? (
+            <>
+              <li className="nav-user">{getEmail()}</li>
+              <li>
+                <button type="button" className="nav-link nav-logout" onClick={handleLogout}>
+                  Cerrar sesión
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login" className={isActive('/login') ? 'nav-link active' : 'nav-link'}>
+                Iniciar Sesión
+              </Link>
+            </li>
+          )}
           <li>
             <button
               className="cart-button"

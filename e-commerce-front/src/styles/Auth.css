@@ -1,0 +1,158 @@
+.auth-page {
+  position: relative;
+  min-height: calc(100svh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Carrusel curvo de portadas de fondo (el mismo del Home), atenuado para
+   que no compite con el formulario pero llena el vacío detrás de la card. */
+.auth-page .auth-page__band {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  filter: blur(1px) saturate(0.85);
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  background: var(--vapor-surface);
+  border: 2px solid var(--vapor-green);
+  border-radius: 10px;
+  padding: 2rem 1.75rem;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  box-shadow: 0 0 16px rgba(106, 216, 164, 0.25);
+}
+
+.auth-card h1 {
+  text-align: center;
+  color: var(--vapor-text);
+  font-family: var(--heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  text-shadow: 0 0 10px var(--vapor-green), 0 0 20px var(--vapor-green-dark);
+  margin: 0 0 1.5rem;
+}
+
+.auth-form .form-group {
+  margin-bottom: 0.85rem;
+}
+
+.auth-form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.auth-form-row .form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.auth-form label {
+  display: block;
+  color: var(--vapor-text);
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.auth-form input,
+.auth-form select {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 1rem;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
+
+.auth-submit {
+  display: block;
+  width: 100%;
+  background-color: var(--vapor-green);
+  color: var(--vapor-black);
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-family: var(--heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 1.25rem;
+  transition: background-color 0.3s ease;
+}
+
+.auth-submit:hover:not(:disabled) {
+  background-color: var(--vapor-green-dark);
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--vapor-muted);
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  color: var(--vapor-green);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  color: var(--vapor-green-dark);
+  text-decoration: underline;
+}
+
+.form-error {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  border-radius: 5px;
+  padding: 0.65rem 0.85rem;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem 1.25rem;
+  }
+}
