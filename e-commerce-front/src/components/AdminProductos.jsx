@@ -8,6 +8,9 @@ function AdminProductos() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  // Error de eliminación aparte del de carga: si falla un DELETE la tabla tiene que seguir visible
+  const [deleteError, setDeleteError] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,6 +27,28 @@ function AdminProductos() {
     fetchProducts()
   }, [])
 
+  const handleDelete = async (product) => {
+    if (!window.confirm(`¿Eliminar "${product.nombre}"? Esta acción no se puede deshacer.`)) return
+
+    setDeleteError(null)
+    setDeletingId(product.id)
+    try {
+      const response = await apiFetch(`/api/productos/${product.id}`, { method: 'DELETE' })
+      if (!response.ok) {
+        // Los errores llegan como texto plano; el 403 del filtro de seguridad puede venir vacío
+        const mensaje = await response.text()
+        setDeleteError(mensaje || `Error ${response.status} al eliminar el producto`)
+        return
+      }
+      // 204 sin body: se saca de la lista local en vez de volver a pedir todo
+      setProducts((prev) => prev.filter((p) => p.id !== product.id))
+    } catch {
+      setDeleteError('No se pudo conectar con el servidor')
+    } finally {
+      setDeletingId(null)
+    }
+  }
+
   if (loading) return <p>Cargando productos...</p>
   if (error) return <p>{error}</p>
 
@@ -36,6 +61,8 @@ function AdminProductos() {
           Nuevo producto
         </button>
       </div>
+
+      {deleteError && <p className="admin-error">{deleteError}</p>}
 
       {/* El wrapper permite scroll horizontal en pantallas chicas sin romper el layout */}
       <div className="admin-table-wrapper">
@@ -65,7 +92,13 @@ function AdminProductos() {
                   >
                     Editar
                   </button>
-                  <button className="btn-admin btn-admin-danger">Eliminar</button>
+                  <button
+                    className="btn-admin btn-admin-danger"
+                    onClick={() => handleDelete(product)}
+                    disabled={deletingId === product.id}
+                  >
+                    {deletingId === product.id ? 'Eliminando...' : 'Eliminar'}
+                  </button>
                 </td>
               </tr>
             ))}
