@@ -69,6 +69,38 @@
   border-bottom-color: var(--vapor-green);
 }
 
+.cart-button {
+  position: relative;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.cart-button:focus-visible {
+  outline: 2px solid var(--vapor-green);
+  outline-offset: 2px;
+}
+
+/* Contador de productos sobre el ícono */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--vapor-green);
+  color: var(--vapor-black);
+  font-size: 0.7rem;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;

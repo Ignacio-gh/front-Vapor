@@ -1,0 +1,130 @@
+.checkout-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--vapor-text);
+}
+
+.checkout-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.checkout-item img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.checkout-item-nombre {
+  flex: 1;
+  min-width: 0;
+}
+
+.checkout-item-precio {
+  color: var(--vapor-green);
+  font-weight: bold;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-green);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-total strong {
+  color: var(--vapor-green);
+}
+
+.checkout-error {
+  color: #e5534b;
+  margin-bottom: 1rem;
+}
+
+.checkout-empty {
+  color: var(--vapor-muted);
+  margin-bottom: 1rem;
+}
+
+.btn-confirmar {
+  display: inline-block;
+  width: 100%;
+  background-color: var(--vapor-green);
+  color: var(--vapor-black);
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-confirmar:hover:not(:disabled) {
+  background-color: var(--vapor-green-dark);
+}
+
+.btn-confirmar:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.btn-confirmar:focus-visible,
+.link-volver:focus-visible {
+  outline: 2px solid var(--vapor-green);
+  outline-offset: 2px;
+}
+
+.link-volver {
+  color: var(--vapor-green);
+  text-decoration: none;
+}
+
+.link-volver:hover {
+  text-decoration: underline;
+}
+
+.checkout-success {
+  text-align: center;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-green);
+  border-radius: 10px;
+  padding: 3rem 2rem;
+}
+
+.checkout-success p {
+  color: var(--vapor-muted);
+  margin-bottom: 1rem;
+}
+
+.checkout-success .btn-confirmar {
+  width: auto;
+  margin-top: 0.5rem;
+}

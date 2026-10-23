@@ -1,0 +1,258 @@
+/* Fondo oscuro detrás del drawer */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 200;
+}
+
+.cart-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Panel: arranca fuera de la pantalla a la derecha y entra con translateX */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(400px, 100vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--vapor-black);
+  border-left: 2px solid var(--vapor-green);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
+  color: var(--vapor-text);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 201;
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+.cart-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--vapor-border);
+}
+
+.cart-drawer-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: var(--vapor-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.btn-close:hover {
+  color: var(--vapor-text);
+}
+
+.cart-count {
+  color: var(--vapor-muted);
+  margin: 1rem 1.5rem 0;
+}
+
+.cart-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--vapor-muted);
+}
+
+/* La lista es lo único que scrollea; header y footer quedan fijos */
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.cart-item-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-title {
+  color: var(--vapor-text);
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem;
+}
+
+.cart-item-price {
+  color: var(--vapor-green);
+  font-weight: bold;
+  margin: 0;
+}
+
+.btn-remove {
+  background: transparent;
+  color: var(--vapor-muted);
+  border: 1px solid var(--vapor-border);
+  padding: 0.4rem 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-remove:hover {
+  color: #e5534b;
+  border-color: #e5534b;
+}
+
+.cart-drawer-footer {
+  border-top: 1px solid var(--vapor-border);
+  padding: 1.25rem 1.5rem;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.cart-total strong {
+  color: var(--vapor-green);
+}
+
+.cart-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-clear {
+  background: transparent;
+  color: var(--vapor-muted);
+  border: 1px solid var(--vapor-border);
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-clear:hover {
+  color: #e5534b;
+  border-color: #e5534b;
+}
+
+.link-continue {
+  color: var(--vapor-green);
+  text-decoration: none;
+}
+
+.link-continue:hover {
+  text-decoration: underline;
+}
+
+.link-checkout {
+  flex: 1;
+  text-align: center;
+  background-color: var(--vapor-green);
+  color: var(--vapor-black);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.link-checkout:hover {
+  background-color: var(--vapor-green-dark);
+}
+
+.btn-close:focus-visible,
+.btn-remove:focus-visible,
+.btn-clear:focus-visible,
+.link-continue:focus-visible,
+.link-checkout:focus-visible {
+  outline: 2px solid var(--vapor-green);
+  outline-offset: 2px;
+}
+
+/* Pop-up que pide iniciar sesión: va por encima del drawer */
+.login-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 300;
+}
+
+.login-modal {
+  width: min(380px, 100%);
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-green);
+  border-radius: 10px;
+  padding: 1.75rem;
+  color: var(--vapor-text);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.login-modal h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.login-modal p {
+  color: var(--vapor-muted);
+  margin: 0 0 1.5rem;
+}
+
+.login-modal-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-overlay,
+  .cart-drawer {
+    transition: none;
+  }
+}

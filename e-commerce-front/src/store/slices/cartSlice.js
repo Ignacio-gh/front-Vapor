@@ -7,7 +7,9 @@ const cartSlice = createSlice({
     // listado de productos en el carrito
     items: [],
     // total de items del carrito
-    total: 0
+    total: 0,
+    // si el drawer del carrito está abierto
+    isOpen: false
   },
 
   // agrupa todas las funciones que modifican el estado del carrito
@@ -44,11 +46,20 @@ const cartSlice = createSlice({
     
     clearCart: (state) => {
       state.items = [];
+    },
+
+    // abren y cierran el drawer del carrito desde cualquier componente
+    openCart: (state) => {
+      state.isOpen = true;
+    },
+
+    closeCart: (state) => {
+      state.isOpen = false;
     }
   }
 });
 
 // exporta las funciones para que puedan ser utilizadas por los componentes
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, openCart, closeCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
