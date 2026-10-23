@@ -1,140 +1,74 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import defaultImage from '../assets/imgXdefault.jpg';
-const Cart = () => {
-  const [cartItems, setCartItems] = React.useState([
-    {
-      id: 1,
-      nombre: 'Remera básica',
-      precio: 12000,
-      quantity: 2
-    },
-    {
-      id: 2,
-      nombre: 'Zapatillas urbanas',
-      precio: 45000,
-      quantity: 1
-    }
-  ]);
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeFromCart, clearCart } from '../store/slices/cartSlice'
+import defaultImage from '../assets/imgXdefault.jpg'
+import '../styles/Cart.css'
 
-  const removeFromCart = (id) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
+function Cart() {
+  const cartItems = useSelector((store) => store.cart.items)
+  const dispatch = useDispatch()
+
+  const total = cartItems.reduce((sum, item) => sum + item.precio, 0)
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1>Carrito de Compras</h1>
-      {/* Renderizado condicional con operador lógico AND (&&) */}
-      {/* Si la condición (cartItems.length > 0) es verdadera, se renderiza el elemento <p>. */}
-      {/* Si es falsa, no se renderiza nada. */}
-      {/* true && true -> true */}
-      {/* false && true -> false */}
+    <div className="cart-container">
+      <h1>Carrito de compras</h1>
+
       {cartItems.length > 0 && (
-        <p>Tienes {cartItems.length} productos en el carrito</p>
+        <p className="cart-count">
+          Tenés {cartItems.length} {cartItems.length === 1 ? 'producto' : 'productos'} en el carrito
+        </p>
       )}
 
-      {/* Renderizado condicional con operador ternario */}
-      {/* Si el carrito está vacío (cartItems.length === 0), muestra un mensaje. */}
-      {/* De lo contrario (? significa 'entonces'), muestra la lista de productos (: significa 'si no'). */}
-      {/* func ? true : false */}
       {cartItems.length === 0 ? (
-        <p>Tu carrito está vacío</p>
+        <p className="cart-empty">Tu carrito está vacío</p>
       ) : (
         <>
-          <div style={{ marginBottom: '2rem' }}>
-            {cartItems.map(item => (
-              <div 
-                key={item.id} 
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '100px 1fr auto',
-                  gap: '1rem',
-                  alignItems: 'center',
-                  padding: '1rem',
-                  borderBottom: '1px solid #eee'
-                }}
-              >
-                <img 
+          <div className="cart-items">
+            {cartItems.map((item) => (
+              <div key={item.id} className="cart-item">
+                <img
+                  className="cart-item-image"
                   src={item.imagen || defaultImage}
-                  alt={item.nombre}
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                    objectFit: 'cover',
-                    borderRadius: '4px'
-                  }}
+                  alt={item.titulo}
                 />
-                <div>
-                  <h3 style={{ margin: '0 0 0.5rem 0' }}>{item.nombre}</h3>
-                  <p style={{ margin: '0', color: '#666' }}>
-                    Cantidad: {item.quantity}
-                  </p>
-                  <p style={{ margin: '0.5rem 0', color: '#2D3277', fontWeight: 'bold' }}>
-                    ${(item.precio * item.quantity).toLocaleString('es-AR')}
+                <div className="cart-item-info">
+                  <h3 className="cart-item-title">{item.titulo}</h3>
+                  <p className="cart-item-price">
+                    ${item.precio.toLocaleString('es-AR')}
                   </p>
                 </div>
                 <button
-                  onClick={() => removeFromCart(item.id)}
-                  style={{
-                    padding: '0.5rem',
-                    background: 'none',
-                    border: '1px solid #ff4444',
-                    color: '#ff4444',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                  }}
+                  className="btn-remove"
+                  onClick={() => dispatch(removeFromCart(item.id))}
                 >
                   Eliminar
                 </button>
               </div>
             ))}
           </div>
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            padding: '1rem',
-            backgroundColor: '#f9f9f9',
-            borderRadius: '4px',
-            marginBottom: '1rem'
-          }}>
+
+          <div className="cart-total">
+            <h3>Total: ${total.toLocaleString('es-AR')}</h3>
+            <button className="btn-clear" onClick={() => dispatch(clearCart())}>
+              Vaciar carrito
+            </button>
           </div>
         </>
       )}
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        <Link 
-          to="/products"
-          style={{
-            backgroundColor: '#2D3277',
-            color: 'white',
-            padding: '0.5rem 1rem',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            textDecoration: 'none'
-          }}
-        >
+
+      <div className="cart-links">
+        <Link to="/products" className="link-continue">
           Seguir comprando
         </Link>
         {cartItems.length > 0 && (
-          <Link 
-            to="/checkout"
-            style={{
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              textDecoration: 'none'
-            }}
-          >
+          <Link to="/checkout" className="link-checkout">
             Pagar
           </Link>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart
