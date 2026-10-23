@@ -24,6 +24,11 @@
   margin-bottom: 1rem;
 }
 
+.admin-error {
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+}
+
 .admin-table-wrapper {
   overflow-x: auto;
 }
@@ -71,6 +76,11 @@
   background-color: var(--vapor-green-dark);
 }
 
+.btn-admin:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .btn-admin-danger {
   background-color: #d9534f;
   color: #fff;
@@ -78,4 +88,63 @@
 
 .btn-admin-danger:hover {
   background-color: #b52b27;
+}
+
+.btn-admin-secondary {
+  background-color: transparent;
+  color: var(--vapor-text);
+  border: 1px solid var(--vapor-border);
+}
+
+.btn-admin-secondary:hover {
+  background-color: var(--vapor-surface-2);
+}
+
+/* Formulario de alta/edición (ProductoForm) */
+.admin-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.admin-form .form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.admin-form label {
+  color: var(--vapor-text);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  padding: 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
+
+.admin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
