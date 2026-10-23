@@ -101,6 +101,21 @@
   text-align: center;
 }
 
+.nav-logout {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-user {
+  color: var(--vapor-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;
