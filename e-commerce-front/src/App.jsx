@@ -4,7 +4,6 @@ import Home from './components/Home'
 import Products from './components/Products'
 import ProductDetail from './components/ProductDetail'
 import About from './components/About'
-import Contact from './components/Contact'
 import NotFound from './components/NotFound'
 import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -27,7 +26,6 @@ function App() {
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/categoria/:genero" element={<Categoria />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
 
         <Route path="/login" element={<Login />} />
