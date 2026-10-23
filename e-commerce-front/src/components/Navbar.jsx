@@ -1,9 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { openCart } from '../store/slices/cartSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
 
 function Navbar() {
   const location = useLocation()
+  const cartCount = useSelector((store) => store.cart.items.length)
+  const dispatch = useDispatch()
 
   const isActive = (path) => location.pathname === path
 
@@ -44,6 +48,16 @@ function Navbar() {
             <Link to="/login" className={isActive('/login') ? 'nav-link active' : 'nav-link'}>
               Login
             </Link>
+          </li>
+          <li>
+            <button
+              className="cart-button"
+              onClick={() => dispatch(openCart())}
+              aria-label={`Abrir carrito (${cartCount} productos)`}
+            >
+              🛒
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </button>
           </li>
         </ul>
       </div>

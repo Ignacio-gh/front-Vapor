@@ -10,7 +10,7 @@ function Login() {
     // Ejemplo solamente: reemplazalo por la respuesta de tu autenticación.
     localStorage.setItem('token', 'token-de-ejemplo')
 
-    const destination = location.state?.from?.pathname || '/cart'
+    const destination = location.state?.from?.pathname || '/'
     navigate(destination, { replace: true })
   }
 
