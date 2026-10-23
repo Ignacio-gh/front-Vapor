@@ -1,109 +1,74 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, clearCart } from '../store/slices/cartSlice';
-import { styles } from './Cart.styles';
-import defaultImage from '../assets/imgXdefault.jpg';
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeFromCart, clearCart } from '../store/slices/cartSlice'
+import defaultImage from '../assets/imgXdefault.jpg'
+import '../styles/Cart.css'
 
-const CartRedux = () => {
-  // useSelector es un hook de React Redux que permite acceder al estado global del store store.js
-  // store.cart.items accede a la propiedad items del slice cart del store global.
-  // cartItems contendrá el array de productos que están actualmente en el carrito.
-  
-  // con esta línea el componente se suscribe a cambios en store.cart.items, 
-  // cada vez que se modifica items de cartSlice, useSelector detecta el cambio y el componente CartRedux se re renderizar
-  const cartItems = useSelector((store) => store.cart.items);
+function Cart() {
+  const cartItems = useSelector((store) => store.cart.items)
+  const dispatch = useDispatch()
 
-  // con useContext Si CUALQUIER dato del contexto cambia, el componente SE RE-RENDERIZA
-  // const { cartItems, addToCart } = useContext(CartContext);
-  // con redux solo re-renderiza si store.cart.items cambió, 
-  // si cambio store.cart.total este compomnete no se renderiza por que no está suscripto a store.cart.total usando useSelector((store) => store.cart.total);
-
-
-  // useDispatch Hook para despachar acciones a Redux (agregar, eliminar, vaciar carrito, etc.)
-  // dispatch con causa re renders
-  const dispatch = useDispatch();
-
-  const handleRemoveFromCart = (productId) => {
-    // Usar dispatch de Redux para eliminar un producto del carrito 
-    dispatch(removeFromCart(productId));
-  };
-
-  const handleClearCart = () => {
-    // Usar dispatch de Redux para vaciar el carrito 
-    dispatch(clearCart());
-  };
-
-  const calculateTotal = () => {
-    return cartItems.reduce((sum, item) => sum + item.precio, 0);
-  };
-
-  // cuando se ejecuta handleRemoveFromCart o handleClearCart, el estado del carrito se actualiza en el store global de Redux.
-  // Esto hace que el componente CartRedux se vuelva a renderizar automáticamente con el nuevo estado del carrito, mostrando los cambios en la interfaz de usuario.
-  const total = calculateTotal();
+  const total = cartItems.reduce((sum, item) => sum + item.precio, 0)
 
   return (
-    <div style={styles.container}>
-      <h1>Carrito de Compras (Redux)</h1>
-      {cartItems.length > 0 && (<p>Tienes {cartItems.length} productos en el carrito</p>)}
+    <div className="cart-container">
+      <h1>Carrito de compras</h1>
+
+      {cartItems.length > 0 && (
+        <p className="cart-count">
+          Tenés {cartItems.length} {cartItems.length === 1 ? 'producto' : 'productos'} en el carrito
+        </p>
+      )}
 
       {cartItems.length === 0 ? (
-        <p>Tu carrito está vacío</p>
+        <p className="cart-empty">Tu carrito está vacío</p>
       ) : (
         <>
-          <div style={styles.itemsContainer}>
-            {cartItems.map(item => (
-              <div 
-                key={item.id} 
-                style={styles.itemCard}
-              >
-                <img 
+          <div className="cart-items">
+            {cartItems.map((item) => (
+              <div key={item.id} className="cart-item">
+                <img
+                  className="cart-item-image"
                   src={item.imagen || defaultImage}
-                  alt={item.nombre}
-                  style={styles.itemImage}
+                  alt={item.titulo}
                 />
-                <div>
-                  <h3 style={styles.itemTitle}>{item.nombre}</h3>
-                  <p style={styles.itemPrice}>
+                <div className="cart-item-info">
+                  <h3 className="cart-item-title">{item.titulo}</h3>
+                  <p className="cart-item-price">
                     ${item.precio.toLocaleString('es-AR')}
                   </p>
                 </div>
-
-                <button onClick={() => handleRemoveFromCart(item.id)} style={styles.removeButton} >
+                <button
+                  className="btn-remove"
+                  onClick={() => dispatch(removeFromCart(item.id))}
+                >
                   Eliminar
                 </button>
-
               </div>
             ))}
           </div>
-          <div style={styles.totalContainer}>
+
+          <div className="cart-total">
             <h3>Total: ${total.toLocaleString('es-AR')}</h3>
-            
-            <button onClick={handleClearCart} style={styles.clearButton} >
+            <button className="btn-clear" onClick={() => dispatch(clearCart())}>
               Vaciar carrito
             </button>
-
           </div>
         </>
       )}
-      <div style={styles.linksContainer}>
-        <Link 
-          to="/products"
-          style={styles.shoppingLink}
-        >
+
+      <div className="cart-links">
+        <Link to="/products" className="link-continue">
           Seguir comprando
         </Link>
         {cartItems.length > 0 && (
-          <Link 
-            to="/checkout"
-            style={styles.checkoutLink}
-          >
+          <Link to="/checkout" className="link-checkout">
             Pagar
           </Link>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CartRedux;
+export default Cart
