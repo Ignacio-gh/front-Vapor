@@ -1,0 +1,158 @@
+/* Contenedor relativo: el popup se ancla debajo del icono */
+.perfil-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.perfil-boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: transparent;
+  color: var(--vapor-text);
+  border: 1px solid var(--vapor-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.perfil-boton:hover,
+.perfil-boton.abierto {
+  color: var(--vapor-green);
+  border-color: var(--vapor-green);
+}
+
+/* Mismo foco visible que el botón del carrito */
+.perfil-boton:focus-visible {
+  outline: 2px solid var(--vapor-green);
+  outline-offset: 2px;
+}
+
+.perfil-popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 110; /* por encima del navbar sticky (z-index 100) */
+  width: 260px;
+  max-width: calc(100vw - 2rem);
+  box-sizing: border-box;
+  padding: 1rem;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-green);
+  border-radius: 8px;
+  box-shadow: 0 0 16px rgba(106, 216, 164, 0.25), 0 8px 20px rgba(0, 0, 0, 0.5);
+  /* El <li> del Navbar tiene nowrap y letra chica: acá se vuelve a texto normal */
+  white-space: normal;
+  font-size: 0.9rem;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+/* Flechita que une el popup con el icono */
+.perfil-popup::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 12px;
+  width: 10px;
+  height: 10px;
+  background: var(--vapor-surface);
+  border-top: 1px solid var(--vapor-green);
+  border-left: 1px solid var(--vapor-green);
+  transform: rotate(45deg);
+}
+
+.perfil-estado {
+  margin: 0;
+  color: var(--vapor-muted);
+}
+
+.perfil-error {
+  color: #ff6b6b;
+}
+
+.perfil-datos {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.perfil-dato dt {
+  font-family: var(--heading);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vapor-muted);
+}
+
+.perfil-dato dd {
+  margin: 0.15rem 0 0;
+  color: var(--vapor-text);
+  overflow-wrap: anywhere; /* emails largos no rompen el ancho del popup */
+}
+
+.perfil-rol {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--vapor-green);
+  font-family: var(--heading);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* En mobile el Navbar se centra en columna: el popup se centra bajo el icono
+   para no salirse de la pantalla por la izquierda */
+@media (max-width: 768px) {
+  .perfil-popup {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .perfil-popup::before {
+    right: auto;
+    left: calc(50% - 5px);
+  }
+}
+
+.perfil-divisor {
+  margin: 1rem 0 0.75rem;
+  border: none;
+  border-top: 1px solid var(--vapor-border);
+}
+
+/* Acción de salida: mismo rojo que el botón Eliminar del panel admin */
+.perfil-logout {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #d9534f;
+  border-radius: 5px;
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.perfil-logout:hover {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.perfil-logout:focus-visible {
+  outline: 2px solid #d9534f;
+  outline-offset: 2px;
+}

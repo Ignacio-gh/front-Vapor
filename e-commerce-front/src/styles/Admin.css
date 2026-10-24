@@ -1,0 +1,220 @@
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Mismo título que Products.css para que el panel se vea parte de la tienda */
+.admin-container h1 {
+  text-align: center;
+  color: var(--vapor-text);
+  margin-bottom: 2rem;
+  font-family: var(--heading);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--vapor-green), 0 0 20px var(--vapor-green-dark);
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-filter label {
+  color: var(--vapor-text);
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Mismos inputs que el formulario de producto para que el panel se vea uniforme */
+.admin-filter input,
+.admin-filter select {
+  min-width: 220px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.admin-filter input:focus,
+.admin-filter select:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
+
+.admin-count {
+  color: var(--vapor-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-table .admin-empty {
+  text-align: center;
+  color: var(--vapor-muted);
+  padding: 2rem 1rem;
+}
+
+.admin-error {
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  color: var(--vapor-text);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--vapor-border);
+}
+
+.admin-table th {
+  background: var(--vapor-surface-2);
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-admin {
+  background-color: var(--vapor-green);
+  color: var(--vapor-black);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-admin:hover {
+  background-color: var(--vapor-green-dark);
+}
+
+.btn-admin:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-admin-danger {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.btn-admin-danger:hover {
+  background-color: #b52b27;
+}
+
+.btn-admin-secondary {
+  background-color: transparent;
+  color: var(--vapor-text);
+  border: 1px solid var(--vapor-border);
+}
+
+.btn-admin-secondary:hover {
+  background-color: var(--vapor-surface-2);
+}
+
+/* Formulario de alta/edición (ProductoForm) */
+.admin-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.admin-form .form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.admin-form label {
+  color: var(--vapor-text);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  padding: 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
+
+.admin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.admin-form .form-hint {
+  color: var(--vapor-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Mensaje propio debajo de cada campo (además de la validación nativa) */
+.field-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+}
+
+.admin-form [aria-invalid='true'] {
+  border-color: #ff6b6b;
+}

@@ -15,6 +15,7 @@ import Biblioteca from './components/Biblioteca'
 import AdminProductos from './components/AdminProductos'
 import Registro from './components/Registro'
 import Categoria from './components/Categoria'
+import ProductoForm from './components/ProductoForm'
 
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
 
         <Route element={<RutaPorRol roles={['ROLE_ADMIN', 'ROLE_VENDEDOR']} />}>
           <Route path="/admin/productos" element={<AdminProductos />} />
+          <Route path="/admin/productos/nuevo" element={<ProductoForm key="nuevo" />} />
+          <Route path="/admin/productos/:id/editar" element={<ProductoForm key="editar" />} />
         </Route>
       </Routes>
       </>

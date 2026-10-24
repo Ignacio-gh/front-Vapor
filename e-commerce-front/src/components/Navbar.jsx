@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { openCart } from '../store/slices/cartSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
-import { isAuthenticated, getEmail, removeToken } from '../utils/auth'
+import { isAuthenticated, getEmail, removeToken, getRoles } from '../utils/auth'
+import PerfilMenu from './PerfilMenu'
 
 function Navbar() {
   const location = useLocation()
@@ -13,6 +14,9 @@ function Navbar() {
 
   const isActive = (path) => location.pathname === path
   const logueado = isAuthenticated()
+  // Mismos roles que la ruta /admin/productos (RutaPorRol en App.jsx): si no coinciden,
+  // el link lleva a una pantalla que redirige al 404
+  const puedeAdministrar = getRoles().some((r) => ['ROLE_ADMIN', 'ROLE_VENDEDOR'].includes(r))
 
   const handleLogout = () => {
     removeToken()
@@ -47,19 +51,16 @@ function Navbar() {
               Biblioteca
             </Link>
           </li>
-          <li>
-            <Link to="/admin/productos" className={isActive('/admin/productos') ? 'nav-link active' : 'nav-link'}>
-              Admin
-            </Link>
-          </li>
+          {puedeAdministrar && (
+            <li>
+              <Link to="/admin/productos" className={isActive('/admin/productos') ? 'nav-link active' : 'nav-link'}>
+                Admin
+              </Link>
+            </li>
+          )}
           {logueado ? (
             <>
-              <li className="nav-user">{getEmail()}</li>
-              <li>
-                <button type="button" className="nav-link nav-logout" onClick={handleLogout}>
-                  Cerrar sesión
-                </button>
-              </li>
+              <li className="nav-user"><PerfilMenu email={getEmail()} onLogout={handleLogout} /></li>
             </>
           ) : (
             <li>
