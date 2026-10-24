@@ -4,6 +4,7 @@ import { openCart } from '../store/slices/cartSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
 import { isAuthenticated, getEmail, removeToken } from '../utils/auth'
+import PerfilMenu from './PerfilMenu'
 
 function Navbar() {
   const location = useLocation()
@@ -54,7 +55,7 @@ function Navbar() {
           </li>
           {logueado ? (
             <>
-              <li className="nav-user">{getEmail()}</li>
+              <li className="nav-user"><PerfilMenu email={getEmail()} /></li>
               <li>
                 <button type="button" className="nav-link nav-logout" onClick={handleLogout}>
                   Cerrar sesión
