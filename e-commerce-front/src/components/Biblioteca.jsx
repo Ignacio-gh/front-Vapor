@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { API_URL, PLACEHOLDER_IMG } from '../config/api'
+import { apiFetch, PLACEHOLDER_IMG } from '../config/api'
 import '../styles/Products.css'
 
 // Juegos que compró el usuario: el backend los agrega al confirmar una orden
@@ -12,13 +12,12 @@ function Biblioteca() {
   useEffect(() => {
     const fetchBiblioteca = async () => {
       try {
-        // El login guarda el JWT y el id del usuario en localStorage
-        const usuarioId = localStorage.getItem('usuarioId')
-        if (!usuarioId) throw new Error('Iniciá sesión para ver tu biblioteca.')
+        // El JWT no trae el id del usuario: lo pedimos al perfil del logueado
+        const me = await apiFetch('/api/usuarios/me')
+        if (!me.ok) throw new Error('Iniciá sesión para ver tu biblioteca.')
+        const usuarioId = (await me.json()).id
 
-        const response = await fetch(`${API_URL}/api/usuarios/${usuarioId}/biblioteca`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        })
+        const response = await apiFetch(`/api/usuarios/${usuarioId}/biblioteca`)
         if (response.status === 401 || response.status === 403) {
           throw new Error('Iniciá sesión para ver tu biblioteca.')
         }

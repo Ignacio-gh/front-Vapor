@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { clearCart } from '../store/slices/cartSlice'
-import { API_URL } from '../config/api'
+import { apiFetch } from '../config/api'
 import defaultImage from '../assets/imgXdefault.jpg'
 import '../styles/Checkout.css'
 
@@ -23,43 +23,32 @@ function Checkout() {
   const total = cartItems.reduce((sum, item) => sum + Number(item.precio), 0)
 
   const handleConfirmar = async () => {
-    // El login guarda el JWT y el id del usuario en localStorage
-    const usuarioId = localStorage.getItem('usuarioId')
-    if (!usuarioId) {
-      setError('Tenés que iniciar sesión para comprar.')
-      return
-    }
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    }
-
     setLoading(true)
     setError(null)
 
     try {
-      // El backend arma la orden con su propio carrito: lo vaciamos por si
-      // quedó algo de un intento anterior y le cargamos lo que hay en Redux.
-      const vaciar = await fetch(`${API_URL}/api/carrito/${usuarioId}`, {
-        method: 'DELETE',
-        headers,
-      })
-      if (!vaciar.ok) throw new Error(mensajeDeError(vaciar.status))
+      // El JWT no trae el id del usuario: lo pedimos al perfil del logueado
+      const me = await apiFetch('/api/usuarios/me')
+      if (!me.ok) throw new Error(mensajeDeError(me.status))
+      const usuarioId = (await me.json()).id
 
-      for (const item of cartItems) {
-        const response = await fetch(`${API_URL}/api/carrito/${usuarioId}/items`, {
+      // El backend arma la orden con su propio carrito: le cargamos lo que hay en Redux.
+      // Primero vemos qué tiene, porque si quedó un juego de un intento anterior,
+      // agregarlo de nuevo le suma cantidad y se cobraría dos veces.
+      const carrito = await apiFetch(`/api/carrito/${usuarioId}`)
+      if (!carrito.ok) throw new Error(mensajeDeError(carrito.status))
+      const yaCargados = new Set((await carrito.json()).items.map((i) => i.productoId))
+
+      for (const item of cartItems.filter((i) => !yaCargados.has(i.id))) {
+        const response = await apiFetch(`/api/carrito/${usuarioId}/items`, {
           method: 'POST',
-          headers,
           body: JSON.stringify({ productoId: item.id, cantidad: 1 }),
         })
         if (!response.ok) throw new Error(mensajeDeError(response.status))
       }
 
       // Crea la orden: descuenta stock y agrega los juegos a la biblioteca
-      const response = await fetch(`${API_URL}/api/ordenes/${usuarioId}`, {
-        method: 'POST',
-        headers,
-      })
+      const response = await apiFetch(`/api/ordenes/${usuarioId}`, { method: 'POST' })
       if (!response.ok) throw new Error(mensajeDeError(response.status))
 
       setOrden(await response.json())
