@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart, clearCart, closeCart } from '../store/slices/cartSlice'
+import { isAuthenticated } from '../utils/auth'
 import defaultImage from '../assets/imgXdefault.jpg'
 import '../styles/Carrito.css'
 
@@ -19,9 +20,8 @@ function Carrito() {
   const close = () => dispatch(closeCart())
 
   const handlePagar = () => {
-    // El login guarda el JWT y el id del usuario en localStorage;
-    // el checkout necesita los dos para crear la orden
-    if (!localStorage.getItem('token') || !localStorage.getItem('usuarioId')) {
+    // false si no hay token o ya expiró
+    if (!isAuthenticated()) {
       setShowLogin(true)
       return
     }
