@@ -60,12 +60,7 @@ function Navbar() {
           )}
           {logueado ? (
             <>
-              <li className="nav-user"><PerfilMenu email={getEmail()} /></li>
-              <li>
-                <button type="button" className="nav-link nav-logout" onClick={handleLogout}>
-                  Cerrar sesión
-                </button>
-              </li>
+              <li className="nav-user"><PerfilMenu email={getEmail()} onLogout={handleLogout} /></li>
             </>
           ) : (
             <li>

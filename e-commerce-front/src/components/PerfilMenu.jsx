@@ -40,7 +40,9 @@ function IconoPerfil() {
 // Menú del usuario logueado en el Navbar. El Navbar solo lo muestra si hay sesión,
 // así que acá no se decide nada de autenticación: solo se piden y muestran los datos.
 // `email` es el que el Navbar ya lee del token y se usa mientras no llega /me.
-function PerfilMenu({ email }) {
+// `onLogout` es el handleLogout del Navbar: la lógica de cerrar sesión vive allá
+// y acá solo se dispara, para no duplicarla.
+function PerfilMenu({ email, onLogout }) {
   const [abierto, setAbierto] = useState(false)
   const [perfil, setPerfil] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -101,6 +103,12 @@ function PerfilMenu({ email }) {
     }
   }, [abierto])
 
+  const handleLogout = () => {
+    // Se cierra primero para no dejar listeners globales colgando mientras se navega
+    setAbierto(false)
+    onLogout?.()
+  }
+
   const nombreCompleto = perfil ? [perfil.nombre, perfil.apellido].filter(Boolean).join(' ') : ''
 
   return (
@@ -143,6 +151,12 @@ function PerfilMenu({ email }) {
               </div>
             </dl>
           )}
+
+          {/* Siempre visible, incluso si /me falló: con la sesión vencida es la salida natural */}
+          <hr className="perfil-divisor" />
+          <button type="button" className="perfil-logout" onClick={handleLogout}>
+            Cerrar sesión
+          </button>
         </div>
       )}
     </div>

@@ -123,3 +123,36 @@
     left: calc(50% - 5px);
   }
 }
+
+.perfil-divisor {
+  margin: 1rem 0 0.75rem;
+  border: none;
+  border-top: 1px solid var(--vapor-border);
+}
+
+/* Acción de salida: mismo rojo que el botón Eliminar del panel admin */
+.perfil-logout {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #d9534f;
+  border-radius: 5px;
+  font-family: var(--heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.perfil-logout:hover {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.perfil-logout:focus-visible {
+  outline: 2px solid #d9534f;
+  outline-offset: 2px;
+}
