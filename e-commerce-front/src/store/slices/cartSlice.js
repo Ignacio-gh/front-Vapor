@@ -10,7 +10,7 @@ export const fetchCarritoItems = createAsyncThunk(
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       credentials: 'include',
       mode: 'cors'
@@ -27,12 +27,11 @@ export const fetchCarritoItems = createAsyncThunk(
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    // listado de productos en el carrito
     items: [],
     total: 0,
-    // se agregan los estados de carga y error para manejar la obtención de los items del carrito desde la API
     loading: false,
-    error: null
+    error: null,
+    isOpen: false,   // nuevo, para el desplegable lateral del carrito
   },
 
   reducers: {
@@ -42,7 +41,7 @@ const cartSlice = createSlice({
       const product = action.payload;
       // find busca en items si ya existe un producto con el mismo id. 
       const existingItem = state.items.find(item => item.id === product.id);
-      
+
       if (!existingItem) {
         // si no encuentra el producto en el array items
         // agrega dicho producto al array items del carrito
@@ -58,10 +57,16 @@ const cartSlice = createSlice({
       // lo enviamos con dispatch(removeFromCart(productId)) desde el componente Carrito.jsx
       state.items = state.items.filter(item => item.id !== action.payload);
     },
-    
-    clearCart: (state) => { 
+    // estados del carrito: abierto o cerrado
+    clearCart: (state) => {
       state.items = [];
-    }
+    },
+    openCart: (state) => {
+      state.isOpen = true
+    },
+    closeCart: (state) => {
+      state.isOpen = false
+    },
   },
 
   // extraReducers maneja las acciones generadas por createAsyncThunk (fetchCarritoItems) para actualizar el estado de carga y error al obtener los items del carrito desde la API
@@ -69,8 +74,8 @@ const cartSlice = createSlice({
   // builder es un objeto que permite agregar casos para manejar las acciones generadas por createAsyncThunk
   extraReducers: (builder) => {
     builder
-    //fetchCarritoItems genera tres acciones automáticamente: pending (cuando la petición está en curso), 
-    // fulfilled (cuando la petición se completa exitosamente) y rejected (cuando la petición falla)
+      //fetchCarritoItems genera tres acciones automáticamente: pending (cuando la petición está en curso), 
+      // fulfilled (cuando la petición se completa exitosamente) y rejected (cuando la petición falla)
       .addCase(fetchCarritoItems.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -89,6 +94,6 @@ const cartSlice = createSlice({
   }
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, openCart, closeCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
