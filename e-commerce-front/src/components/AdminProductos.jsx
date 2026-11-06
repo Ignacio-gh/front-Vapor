@@ -1,13 +1,8 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiFetch } from '../config/api'
+import { normalizar } from '../utils/texto'
 import '../styles/Admin.css'
-
-// Pasa a minúsculas y quita tildes para que "accion" encuentre "Acción":
-// NFD separa la letra de su diacrítico y el rango ̀-ͯ son esos diacríticos
-function normalizar(texto) {
-  return (texto ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-}
 
 // Cada opción del select apunta a su comparador; así agregar un orden nuevo es una línea
 const ORDENES = {
