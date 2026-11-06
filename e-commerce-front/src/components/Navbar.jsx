@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { openCart } from '../store/slices/cartSlice'
+import { setBusqueda } from '../store/slices/catalogoSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
 import { isAuthenticated, getEmail, removeToken, getRoles } from '../utils/auth'
@@ -10,6 +11,7 @@ function Navbar() {
   const location = useLocation()
   const navigate = useNavigate()
   const cartCount = useSelector((store) => store.cart.items.length)
+  const busqueda = useSelector((store) => store.catalogo.busqueda)
   const dispatch = useDispatch()
 
   const isActive = (path) => location.pathname === path
@@ -17,6 +19,12 @@ function Navbar() {
   // Mismos roles que la ruta /admin/productos (RutaPorRol en App.jsx): si no coinciden,
   // el link lleva a una pantalla que redirige al 404
   const puedeAdministrar = getRoles().some((r) => ['ROLE_ADMIN', 'ROLE_VENDEDOR'].includes(r))
+
+  // Busca mientras escribe; desde cualquier pantalla lleva al catálogo, que es donde se filtra
+  const handleBusqueda = (e) => {
+    dispatch(setBusqueda(e.target.value))
+    if (location.pathname !== '/products') navigate('/products')
+  }
 
   const handleLogout = () => {
     removeToken()
@@ -29,6 +37,15 @@ function Navbar() {
         <Link to="/" className="navbar-brand">
           <img src={vaporLogo} alt="" className="navbar-logo" />
         </Link>
+
+        <input
+          type="search"
+          className="nav-search"
+          placeholder="Buscar juegos..."
+          aria-label="Buscar juegos por nombre"
+          value={busqueda}
+          onChange={handleBusqueda}
+        />
 
         <ul className="nav-menu">
           <li>
