@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import FavoriteButton from './FavoriteButton'
-import defaultImage from '../assets/imgXdefault.jpg'
+import { PLACEHOLDER_IMG } from '../config/api'
 import '../styles/FavoritosLista.css'
 
 // Sección "Mis favoritos" para incluir dentro de Biblioteca
@@ -31,8 +31,12 @@ function FavoritosLista() {
             <Link to={`/products/${producto.id}`} className="favorito-link">
               <img
                 className="favorito-image"
-                src={producto.imagenes?.[0] || defaultImage}
+                src={producto.imagenes?.[0] ?? PLACEHOLDER_IMG}
                 alt={producto.nombre}
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = PLACEHOLDER_IMG
+                }}
               />
               <div className="favorito-info">
                 <h3>{producto.nombre}</h3>

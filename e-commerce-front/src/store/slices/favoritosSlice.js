@@ -1,29 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-const API = 'http://localhost:8080/api/favoritos'
-
-const authHeaders = () => ({
-  'Content-Type': 'application/json',
-  // Misma clave que usa utils/auth.js
-  Authorization: `Bearer ${localStorage.getItem('token')}`,
-})
+import { apiFetch } from '../../config/api'
 
 // Trae los favoritos del usuario logueado
 export const fetchFavoritos = createAsyncThunk('favoritos/fetch', async () => {
-  const res = await fetch(API, { headers: authHeaders() })
+  const res = await apiFetch('/api/favoritos')
   if (!res.ok) throw new Error('No se pudieron cargar los favoritos')
   return res.json()
 })
 
 // Reciben el producto completo (no solo el id) para poder actualizar la lista al instante
 export const addFavorito = createAsyncThunk('favoritos/add', async (product) => {
-  const res = await fetch(`${API}/${product.id}`, { method: 'POST', headers: authHeaders() })
+  const res = await apiFetch(`/api/favoritos/${product.id}`, { method: 'POST' })
   if (!res.ok) throw new Error('No se pudo agregar a favoritos')
   return product.id
 })
 
 export const removeFavorito = createAsyncThunk('favoritos/remove', async (product) => {
-  const res = await fetch(`${API}/${product.id}`, { method: 'DELETE', headers: authHeaders() })
+  const res = await apiFetch(`/api/favoritos/${product.id}`, { method: 'DELETE' })
   if (!res.ok) throw new Error('No se pudo quitar de favoritos')
   return product.id
 })

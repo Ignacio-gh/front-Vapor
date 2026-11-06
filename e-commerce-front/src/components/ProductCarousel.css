@@ -60,6 +60,18 @@
   scroll-snap-align: start;
 }
 
+/* Contenedor de la tarjeta + corazón: el corazón se posiciona respecto a este bloque
+   y la tarjeta y el corazón se levantan juntos al pasar el mouse */
+.carousel-card-wrapper {
+  position: relative;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.carousel-card-wrapper:hover {
+  transform: translateY(-4px);
+}
+
 .carousel-card {
   display: flex;
   flex-direction: column;
@@ -70,11 +82,10 @@
   overflow: hidden;
   text-decoration: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .carousel-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0 0 16px rgba(106, 216, 164, 0.35);
   border-color: var(--vapor-green-dark);
 }
@@ -128,6 +139,16 @@
   color: var(--vapor-green);
   font-weight: 700;
   font-size: 0.95rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-card-wrapper {
+    transition: none;
+  }
+
+  .carousel-card-wrapper:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 480px) {

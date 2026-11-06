@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { PLACEHOLDER_IMG } from '../config/api'
+import FavoriteButton from './FavoriteButton'
 import './ProductCarousel.css'
 
 const TIPO_LABELS = {
@@ -13,23 +14,27 @@ function ProductCard({ product }) {
   const badge = TIPO_LABELS[product.tipo]
 
   return (
-    <Link to={`/products/${product.id}`} className="carousel-card">
-      <div className="carousel-card__image">
-        <img
-          src={product.imagenes?.[0] ?? PLACEHOLDER_IMG}
-          alt={product.nombre}
-          onError={(e) => {
-            e.currentTarget.onerror = null
-            e.currentTarget.src = PLACEHOLDER_IMG
-          }}
-        />
-        {badge && <span className="carousel-card__badge">{badge}</span>}
-      </div>
-      <div className="carousel-card__info">
-        <h3>{product.nombre}</h3>
-        <p className="carousel-card__price">${product.precio}</p>
-      </div>
-    </Link>
+    // El corazón va al lado del <Link> (no adentro) para no anidar un botón dentro de un enlace
+    <div className="carousel-card-wrapper">
+      <Link to={`/products/${product.id}`} className="carousel-card">
+        <div className="carousel-card__image">
+          <img
+            src={product.imagenes?.[0] ?? PLACEHOLDER_IMG}
+            alt={product.nombre}
+            onError={(e) => {
+              e.currentTarget.onerror = null
+              e.currentTarget.src = PLACEHOLDER_IMG
+            }}
+          />
+          {badge && <span className="carousel-card__badge">{badge}</span>}
+        </div>
+        <div className="carousel-card__info">
+          <h3>{product.nombre}</h3>
+          <p className="carousel-card__price">${product.precio}</p>
+        </div>
+      </Link>
+      <FavoriteButton product={product} />
+    </div>
   )
 }
 
