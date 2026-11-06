@@ -1,4 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Products from './components/Products'
@@ -16,9 +18,23 @@ import AdminProductos from './components/AdminProductos'
 import Registro from './components/Registro'
 import Categoria from './components/Categoria'
 import ProductoForm from './components/ProductoForm'
-
+import { fetchFavoritos } from './store/slices/favoritosSlice'
+import { isAuthenticated } from './utils/auth'
 
 function App() {
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const favStatus = useSelector((state) => state.favoritos.status)
+
+  // Carga los favoritos cuando hay sesión. Se vuelve a evaluar al cambiar de ruta,
+  // así también se cargan justo después de iniciar sesión (sin recargar la página).
+  // Al cerrar sesión, clearFavoritos() deja el estado en 'idle' y no se vuelve a pedir.
+  useEffect(() => {
+    if (isAuthenticated() && favStatus === 'idle') {
+      dispatch(fetchFavoritos())
+    }
+  }, [location.pathname, favStatus, dispatch])
+
   return (
     <>
       <Navbar />
@@ -45,10 +61,8 @@ function App() {
           <Route path="/admin/productos/:id/editar" element={<ProductoForm key="editar" />} />
         </Route>
       </Routes>
-      </>
-      )
+    </>
+  )
 }
 
-
-
-      export default App
+export default App

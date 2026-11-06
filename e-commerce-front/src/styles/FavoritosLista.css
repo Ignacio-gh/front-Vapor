@@ -1,0 +1,64 @@
+.favoritos {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--vapor-text);
+}
+
+.favoritos h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.favoritos-msg {
+  color: var(--vapor-muted);
+}
+
+.favoritos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.favorito-card {
+  position: relative;
+  background: var(--vapor-surface);
+  border: 1px solid var(--vapor-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.favorito-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.favorito-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.favorito-info {
+  padding: 1rem;
+}
+
+.favorito-info h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  color: var(--vapor-text);
+}
+
+.favorito-price {
+  margin: 0;
+  font-weight: bold;
+  color: var(--vapor-green);
+}
+
+.favorito-link:focus-visible {
+  outline: 2px solid var(--vapor-green);
+  outline-offset: -2px;
+}
