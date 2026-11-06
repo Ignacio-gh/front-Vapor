@@ -15,6 +15,7 @@ import Login from './components/Login'
 import RutaPorRol from './components/RutaPorRol'
 import Biblioteca from './components/Biblioteca'
 import AdminProductos from './components/AdminProductos'
+import AdminPanel from './components/AdminPanel'
 import Registro from './components/Registro'
 import Categoria from './components/Categoria'
 import ProductoForm from './components/ProductoForm'
@@ -55,7 +56,9 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
         </Route>
 
-        <Route element={<RutaPorRol roles={['ROLE_ADMIN', 'ROLE_VENDEDOR']} />}>
+        {/* Panel de administración: solo ADMIN (alta, edición y baja de juegos incluidas) */}
+        <Route element={<RutaPorRol roles={['ROLE_ADMIN']} />}>
+          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/admin/productos" element={<AdminProductos />} />
           <Route path="/admin/productos/nuevo" element={<ProductoForm key="nuevo" />} />
           <Route path="/admin/productos/:id/editar" element={<ProductoForm key="editar" />} />

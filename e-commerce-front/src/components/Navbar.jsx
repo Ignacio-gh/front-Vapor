@@ -18,9 +18,9 @@ function Navbar() {
   const dispatch = useDispatch()
   const isActive = (path) => location.pathname === path
   const logueado = isAuthenticated()
-  // Mismos roles que la ruta /admin/productos (RutaPorRol en App.jsx): si no coinciden,
+  // Mismos roles que las rutas /admin (RutaPorRol en App.jsx): si no coinciden,
   // el link lleva a una pantalla que redirige al 404
-  const puedeAdministrar = getRoles().some((r) => ['ROLE_ADMIN', 'ROLE_VENDEDOR'].includes(r))
+  const puedeAdministrar = getRoles().includes('ROLE_ADMIN')
 
   // Busca mientras escribe; desde cualquier pantalla lleva al catálogo, que es donde se filtra
   const handleBusqueda = (e) => {
@@ -73,7 +73,7 @@ function Navbar() {
           </li>
           {puedeAdministrar && (
             <li>
-              <Link to="/admin/productos" className={isActive('/admin/productos') ? 'nav-link active' : 'nav-link'}>
+              <Link to="/admin" className={location.pathname.startsWith('/admin') ? 'nav-link active' : 'nav-link'}>
                 Admin
               </Link>
             </li>
