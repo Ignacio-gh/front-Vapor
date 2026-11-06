@@ -152,3 +152,62 @@
 .products-container tbody tr:hover {
   background: var(--vapor-surface-2);
 }
+
+/* Buscador y filtro de categorías del catálogo */
+.catalogo-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.catalogo-busqueda {
+  min-width: 240px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.catalogo-busqueda:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
+
+.catalogo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 999px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.chip:hover {
+  border-color: var(--vapor-green);
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--vapor-green);
+  background: var(--accent-bg);
+  color: var(--vapor-green);
+}
+
+.chip-limpiar {
+  background: transparent;
+  color: var(--vapor-muted);
+}

@@ -128,3 +128,23 @@
     gap: 1rem;
   }
 }
+
+/* Buscador del navbar */
+.nav-search {
+  flex: 1;
+  min-width: 140px;
+  max-width: 260px;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--vapor-border);
+  border-radius: 5px;
+  background: var(--vapor-surface-2);
+  color: var(--vapor-text);
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+.nav-search:focus {
+  outline: none;
+  border-color: var(--vapor-green);
+  box-shadow: 0 0 5px rgba(106, 216, 164, 0.3);
+}
