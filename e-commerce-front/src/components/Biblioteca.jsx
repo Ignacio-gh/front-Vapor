@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFetch, PLACEHOLDER_IMG } from '../config/api'
+import FavoritosLista from './FavoritosLista'
 import '../styles/Products.css'
 
-// Juegos que compró el usuario: el backend los agrega al confirmar una orden
+// Juegos que compró el usuario: el backend los agrega al confirmar una orden.
+// Debajo se muestra la lista de favoritos, que vive en Redux.
 function Biblioteca() {
   const [juegos, setJuegos] = useState([])
   const [loading, setLoading] = useState(true)
@@ -33,34 +35,43 @@ function Biblioteca() {
     fetchBiblioteca()
   }, [])
 
-  if (loading) return <p>Cargando biblioteca...</p>
-  if (error) return <p>{error}</p>
-
+  // Los estados de carga y error van dentro del contenedor (sin return anticipado)
+  // para que si falla la biblioteca igual se vean los favoritos de abajo.
   return (
-    <div className="products-container">
-      <h1>Mi Biblioteca</h1>
-      {juegos.length === 0 ? (
-        <p>
-          Todavía no tenés juegos. <Link to="/products">Ver productos</Link>
-        </p>
-      ) : (
-        <div className="products-grid">
-          {juegos.map((juego) => (
-            <div key={juego.id} className="product-card">
-              <div className="product-image">
-                <img src={juego.imagenes?.[0] ?? PLACEHOLDER_IMG} alt={juego.nombre} />
+    <>
+      <div className="products-container">
+        <h1>Mi Biblioteca</h1>
+
+        {loading && <p>Cargando biblioteca...</p>}
+        {error && <p>{error}</p>}
+
+        {!loading && !error && juegos.length === 0 && (
+          <p>
+            Todavía no tenés juegos. <Link to="/products">Ver productos</Link>
+          </p>
+        )}
+
+        {!loading && !error && juegos.length > 0 && (
+          <div className="products-grid">
+            {juegos.map((juego) => (
+              <div key={juego.id} className="product-card">
+                <div className="product-image">
+                  <img src={juego.imagenes?.[0] ?? PLACEHOLDER_IMG} alt={juego.nombre} />
+                </div>
+                <div className="product-info">
+                  <h3>{juego.nombre}</h3>
+                  <Link to={`/products/${juego.id}`} className="btn-details">
+                    Ver Detalles
+                  </Link>
+                </div>
               </div>
-              <div className="product-info">
-                <h3>{juego.nombre}</h3>
-                <Link to={`/products/${juego.id}`} className="btn-details">
-                  Ver Detalles
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <FavoritosLista />
+    </>
   )
 }
 
