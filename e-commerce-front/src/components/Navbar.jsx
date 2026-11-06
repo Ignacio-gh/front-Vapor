@@ -5,13 +5,15 @@ import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
 import { isAuthenticated, getEmail, removeToken, getRoles } from '../utils/auth'
 import PerfilMenu from './PerfilMenu'
+import { clearFavoritos } from '../store/slices/favoritosSlice'
+
+
 
 function Navbar() {
   const location = useLocation()
   const navigate = useNavigate()
   const cartCount = useSelector((store) => store.cart.items.length)
   const dispatch = useDispatch()
-
   const isActive = (path) => location.pathname === path
   const logueado = isAuthenticated()
   // Mismos roles que la ruta /admin/productos (RutaPorRol en App.jsx): si no coinciden,
@@ -20,6 +22,7 @@ function Navbar() {
 
   const handleLogout = () => {
     removeToken()
+    dispatch(clearFavoritos())
     navigate('/')
   }
 
