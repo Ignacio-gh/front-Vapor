@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { openCart } from '../store/slices/cartSlice'
+import { openCart, clearCart } from '../store/slices/cartSlice'
 import { setBusqueda } from '../store/slices/catalogoSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
@@ -31,6 +31,8 @@ function Navbar() {
   const handleLogout = () => {
     removeToken()
     dispatch(clearFavoritos())
+    // El carrito persiste en localStorage: se vacía para que el próximo usuario no vea el de este
+    dispatch(clearCart())
     navigate('/')
   }
 
