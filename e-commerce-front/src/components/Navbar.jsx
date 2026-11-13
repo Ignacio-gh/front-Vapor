@@ -4,7 +4,7 @@ import { openCart, clearCart } from '../store/slices/cartSlice'
 import { setBusqueda } from '../store/slices/catalogoSlice'
 import '../styles/Navbar.css'
 import vaporLogo from '../assets/vapor-logo.svg'
-import { isAuthenticated, getEmail, removeToken, getRoles } from '../utils/auth'
+import { logout } from '../store/slices/authSlice'
 import PerfilMenu from './PerfilMenu'
 import { clearFavoritos } from '../store/slices/favoritosSlice'
 
@@ -17,10 +17,11 @@ function Navbar() {
   const busqueda = useSelector((store) => store.catalogo.busqueda)
   const dispatch = useDispatch()
   const isActive = (path) => location.pathname === path
-  const logueado = isAuthenticated()
-  // Mismos roles que las rutas /admin (RutaPorRol en App.jsx): si no coinciden,
+  const usuario = useSelector((store) => store.auth.usuario)
+  const logueado = usuario !== null
+  // Mismo rol que las rutas /admin (RutaPorRol en App.jsx): si no coincide,
   // el link lleva a una pantalla que redirige al 404
-  const puedeAdministrar = getRoles().includes('ROLE_ADMIN')
+  const puedeAdministrar = usuario?.role === 'ADMIN'
 
   // Busca mientras escribe; desde cualquier pantalla lleva al catálogo, que es donde se filtra
   const handleBusqueda = (e) => {
@@ -29,7 +30,8 @@ function Navbar() {
   }
 
   const handleLogout = () => {
-    removeToken()
+    // El backend borra la cookie HttpOnly (el front no puede tocarla)
+    dispatch(logout())
     dispatch(clearFavoritos())
     // El carrito persiste en localStorage: se vacía para que el próximo usuario no vea el de este
     dispatch(clearCart())
@@ -82,7 +84,7 @@ function Navbar() {
           )}
           {logueado ? (
             <>
-              <li className="nav-user"><PerfilMenu email={getEmail()} onLogout={handleLogout} /></li>
+              <li className="nav-user"><PerfilMenu email={usuario.email} onLogout={handleLogout} /></li>
             </>
           ) : (
             <li>

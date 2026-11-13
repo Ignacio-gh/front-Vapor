@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { addFavorito, removeFavorito } from '../store/slices/favoritosSlice'
-import { isAuthenticated } from '../utils/auth'
 import '../styles/FavoriteButton.css'
 
 // Corazón para la esquina de una tarjeta de producto.
 // El contenedor padre tiene que tener position: relative.
 function FavoriteButton({ product }) {
   const dispatch = useDispatch()
+  const usuario = useSelector((state) => state.auth.usuario)
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -20,7 +20,7 @@ function FavoriteButton({ product }) {
     e.preventDefault()
     e.stopPropagation()
 
-    if (!isAuthenticated()) {
+    if (!usuario) {
       navigate('/login', { state: { from: location } })
       return
     }

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { API_URL } from '../config/api'
-import { saveToken } from '../utils/auth'
+import { setUsuario } from '../store/slices/authSlice'
 import TiltedGridHero from './TiltedGridHero'
 import products from '../data/products.json'
 import '../styles/Auth.css'
@@ -15,6 +16,7 @@ const heroImages = products.map((producto) => ({
 function Login() {
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,16 +33,17 @@ function Login() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        // Sin esto el navegador ignora la cookie HttpOnly que manda el backend (otro origen)
+        credentials: 'include',
       })
 
-      const body = await response.text()
-
       if (!response.ok) {
-        throw new Error(body || 'No se pudo iniciar sesión. Intentá de nuevo.')
+        const mensaje = await response.text()
+        throw new Error(mensaje || 'No se pudo iniciar sesión. Intentá de nuevo.')
       }
 
-      const token = body
-      saveToken(token)
+      // El token quedó en la cookie; el body trae el perfil (nombre, email, rol)
+      dispatch(setUsuario(await response.json()))
 
       const destination = location.state?.from?.pathname || '/'
       navigate(destination, { replace: true })

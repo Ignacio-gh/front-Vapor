@@ -4,6 +4,7 @@ import counterSlice from './slices/counterSlice';
 import cartSlice from './slices/cartSlice';
 import favoritosReducer from './slices/favoritosSlice'
 import catalogoSlice from './slices/catalogoSlice';
+import authSlice from './slices/authSlice';
 import { cargarCarrito, persistirCarrito } from './persistencia';
 
 // este es el store donde va a estar toda la info global que necesitan los todos componentes de la app
@@ -14,6 +15,7 @@ export const store = configureStore({
     cart: cartSlice, // Gestiona el estado del carrito y sus funciones: addToCart, removeFromCart, clearCart
     favoritos: favoritosReducer, // Gestiona el estado de los favoritos (si lo tienes)
     catalogo: catalogoSlice, // Gestiona los filtros del catálogo: búsqueda por nombre y categoría
+    auth: authSlice, // Usuario logueado (perfil y rol), confirmado por el backend con la cookie de sesión
     // user: userReducer, // Gestiona el estado del usuario (si lo tienes)
   },
   // Estado inicial restaurado de localStorage: el carrito sobrevive a un F5.
