@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Products from './components/Products'
@@ -20,21 +20,25 @@ import Registro from './components/Registro'
 import Categoria from './components/Categoria'
 import ProductoForm from './components/ProductoForm'
 import { fetchFavoritos } from './store/slices/favoritosSlice'
-import { isAuthenticated } from './utils/auth'
+import { fetchSesion } from './store/slices/authSlice'
 
 function App() {
   const dispatch = useDispatch()
-  const location = useLocation()
   const favStatus = useSelector((state) => state.favoritos.status)
+  const usuario = useSelector((state) => state.auth.usuario)
 
-  // Carga los favoritos cuando hay sesión. Se vuelve a evaluar al cambiar de ruta,
-  // así también se cargan justo después de iniciar sesión (sin recargar la página).
+  // Al abrir la app (o con F5) se le pregunta al backend si la cookie de sesión sigue vigente
+  useEffect(() => {
+    dispatch(fetchSesion())
+  }, [dispatch])
+
+  // Carga los favoritos cuando hay sesión: al abrir la app o justo después de iniciar sesión.
   // Al cerrar sesión, clearFavoritos() deja el estado en 'idle' y no se vuelve a pedir.
   useEffect(() => {
-    if (isAuthenticated() && favStatus === 'idle') {
+    if (usuario && favStatus === 'idle') {
       dispatch(fetchFavoritos())
     }
-  }, [location.pathname, favStatus, dispatch])
+  }, [usuario, favStatus, dispatch])
 
   return (
     <>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart, clearCart, closeCart } from '../store/slices/cartSlice'
-import { isAuthenticated } from '../utils/auth'
 import defaultImage from '../assets/imgXdefault.jpg'
 import '../styles/Carrito.css'
 
@@ -10,6 +9,7 @@ import '../styles/Carrito.css'
 function Carrito() {
   const cartItems = useSelector((store) => store.cart.items)
   const isOpen = useSelector((store) => store.cart.isOpen)
+  const usuario = useSelector((store) => store.auth.usuario)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   // pop-up que pide iniciar sesión antes de pagar
@@ -20,8 +20,8 @@ function Carrito() {
   const close = () => dispatch(closeCart())
 
   const handlePagar = () => {
-    // false si no hay token o ya expiró
-    if (!isAuthenticated()) {
+    // null si no hay sesión (sin cookie o vencida)
+    if (!usuario) {
       setShowLogin(true)
       return
     }

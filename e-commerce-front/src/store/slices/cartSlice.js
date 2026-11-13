@@ -9,10 +9,9 @@ export const fetchCarritoItems = createAsyncThunk(
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Content-Type': 'application/json'
       },
-      credentials: 'include',
+      credentials: 'include', // manda la cookie HttpOnly con el JWT
       mode: 'cors'
     });
     if (!response.ok) {
