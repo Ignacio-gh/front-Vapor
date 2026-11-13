@@ -211,3 +211,19 @@
   background: transparent;
   color: var(--vapor-muted);
 }
+
+/* Chips de la página de categoría: son links, no botones */
+.categoria-nav {
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+a.chip {
+  text-decoration: none;
+}
+
+.chip[aria-current='page'] {
+  border-color: var(--vapor-green);
+  background: var(--accent-bg);
+  color: var(--vapor-green);
+}

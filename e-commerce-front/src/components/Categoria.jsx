@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, NavLink } from 'react-router-dom'
 import { API_URL, PLACEHOLDER_IMG } from '../config/api'
 import '../styles/Products.css'
 
@@ -65,12 +65,16 @@ function Categoria() {
     <div className="products-container">
       <h1>Categoría: {genero}</h1>
 
-      <nav>
+      {/* Mismos chips que el catálogo (/products). NavLink marca el género actual con aria-current="page" */}
+      <nav className="catalogo-chips categoria-nav" aria-label="Categorías">
         {errorGeneros && <span>{errorGeneros}</span>}
+        <Link to="/products" className="chip">
+          Todos
+        </Link>
         {generos.map((g) => (
-          <Link key={g} to={`/categoria/${g}`} className="btn-details">
+          <NavLink key={g} to={`/categoria/${g}`} className="chip">
             {g}
-          </Link>
+          </NavLink>
         ))}
       </nav>
 
